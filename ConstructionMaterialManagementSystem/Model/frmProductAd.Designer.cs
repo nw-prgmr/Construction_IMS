@@ -44,20 +44,24 @@
             this.label2 = new System.Windows.Forms.Label();
             this.Supplier = new System.Windows.Forms.Label();
             this.cboSupplier = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.lblProduct = new System.Windows.Forms.Label();
+            this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.lblProduct);
             this.panel3.Location = new System.Drawing.Point(0, 526);
             this.panel3.Size = new System.Drawing.Size(639, 92);
             this.panel3.TabIndex = 16;
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(33, 47);
-            this.label1.Size = new System.Drawing.Size(145, 28);
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(31, 37);
+            this.label1.Size = new System.Drawing.Size(210, 38);
             this.label1.Text = "Product Details";
             // 
             // panel1
@@ -67,6 +71,7 @@
             // 
             // guna2CirclePictureBox1
             // 
+            this.guna2CirclePictureBox1.BackColor = System.Drawing.Color.Gray;
             this.guna2CirclePictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.guna2CirclePictureBox1.FillColor = System.Drawing.Color.Transparent;
             this.guna2CirclePictureBox1.ImageRotate = 0F;
@@ -209,7 +214,6 @@
             this.txtProDesc.Size = new System.Drawing.Size(547, 63);
             this.txtProDesc.TabIndex = 6;
             this.txtProDesc.Tag = "v";
-            this.txtProDesc.TextChanged += new System.EventHandler(this.txtProBarcode_TextChanged);
             // 
             // label5
             // 
@@ -313,6 +317,16 @@
             this.cboSupplier.TabIndex = 1;
             this.cboSupplier.Tag = "v";
             // 
+            // lblProduct
+            // 
+            this.lblProduct.AutoSize = true;
+            this.lblProduct.Location = new System.Drawing.Point(3, 75);
+            this.lblProduct.Name = "lblProduct";
+            this.lblProduct.Size = new System.Drawing.Size(43, 17);
+            this.lblProduct.TabIndex = 4;
+            this.lblProduct.Text = "ProID";
+            this.lblProduct.Visible = false;
+            // 
             // frmProductAd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -336,7 +350,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Name = "frmProductAd";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmProductAd";
             this.Controls.SetChildIndex(this.panel1, 0);
             this.Controls.SetChildIndex(this.panel3, 0);
@@ -356,6 +369,8 @@
             this.Controls.SetChildIndex(this.cboBrand, 0);
             this.Controls.SetChildIndex(this.btnProBrowse, 0);
             this.Controls.SetChildIndex(this.guna2CirclePictureBox1, 0);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).EndInit();
@@ -382,5 +397,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label Supplier;
         public Guna.UI2.WinForms.Guna2ComboBox cboSupplier;
+        public System.Windows.Forms.Label lblProduct;
     }
 }

@@ -29,29 +29,7 @@ namespace ConstructionMaterialManagementSystem.Model
 
         private void btnBrandSave_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (txtBrandName.Text == string.Empty)
-                {
-                    MessageBox.Show("Warning: Required Empty Field" , "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    // guna2MessageDialog1.Show("Warning: Required empty field", "Warning");
-                    return;
-                }
-                con.Open();
-                cmd = new MySqlCommand("INSERT INTO tbl_brand(bName) VALUES (@brand)", con);
-                cmd.Parameters.AddWithValue("@brand", txtBrandName.Text);
-                cmd.ExecuteNonQuery();
-                con.Close();
-                MessageBox.Show("Info: Save Successfully", "Brand Added", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //guna2MessageDialog1.Show("Save Successfully.", "Category Added");
-                txtBrandName.Clear();
-                frmbrand.LoadRecords();
-            }
-            catch (Exception ex)
-            {
-                con.Close();
-                MessageBox.Show("Warning: " + ex.Message, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            
         }
 
         private void btnBrandClose_Click(object sender, EventArgs e)

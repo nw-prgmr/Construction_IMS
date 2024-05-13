@@ -36,7 +36,7 @@ namespace ConstructionMaterialManagementSystem.Model
 
                 if(id==0) // INSERT
                 {
-                    qry = @"INSERT INTO tbl_users (uName, username, uPass, uEmail, uImage) VALUES (@name, @username, @pass, @email, @image)";
+                    qry = @"INSERT INTO tbl_users (uName, username, uPass, uStatus, uEmail, uImage) VALUES (@name, @username, @pass, @uStatus, @email, @image)";
                 }
                 else //UPDATE
                 {

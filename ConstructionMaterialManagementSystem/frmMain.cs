@@ -1,5 +1,6 @@
 ﻿using ConstructionMaterialManagementSystem.Model;
 using ConstructionMaterialManagementSystem.View;
+using Guna.UI2.WinForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,14 +31,22 @@ namespace ConstructionMaterialManagementSystem
             f.Show();
         }
 
-       public void btnClear()
+        private void btnSettings(object sender, EventArgs e)
         {
-            btnDashboard.BackColor = Color.FromArgb(31, 52, 64);
-            btnProducts.BackColor = Color.FromArgb(31, 52, 64);
-            btnLogout.BackColor = Color.FromArgb(31, 52, 64);
-            btnReports.BackColor = Color.FromArgb(31, 52, 64); 
-            btnUsers.BackColor = Color.FromArgb(31, 52, 64);
-            btnSupplier.BackColor = Color.FromArgb(31, 52, 64);
+            foreach (Control c in buttonPanel.Controls)
+            {
+                if (c is Guna2Button) // Check for Guna2Button type
+                {
+                    ((Guna2Button)c).FillColor = Color.FromArgb(31, 52, 64); // Use FillColor for Guna2Button
+                }
+            }
+
+            // Get the clicked button (assuming Guna2Button)
+            Guna2Button clickedButton = (Guna2Button)sender;
+            if (clickedButton != null) // Check if button was clicked (sender might be null)
+            {
+                clickedButton.FillColor = Color.FromArgb(37, 189, 176); // Set clicked button color
+            }
         }
 
         // for instance
@@ -52,75 +61,94 @@ namespace ConstructionMaterialManagementSystem
             Application.Exit();
         }
 
-        
-
-        private void btnReports_Click(object sender, EventArgs e)
-        {
-            //btnClear();
-            //btnReports.BackColor = Color.FromArgb(37, 189, 176);
-            Addcontrols(new frmProductView());
-        }
-
-
         private void frmDashboard_Load(object sender, EventArgs e)
         {
             _obj = this;
             lblUser.Text = MainClass.USER;
             lblStatus.Text = MainClass.STATUS;
+
+            foreach (Control c in buttonPanel.Controls)
+            {
+                if (c is Guna2Button) // Check for Guna2Button type
+                {
+                    ((Guna2Button)c).MouseEnter += new EventHandler(button_MouseEnter); // Attach individual hover event
+                    ((Guna2Button)c).MouseLeave += new EventHandler(button_MouseLeave); // Attach individual leave event
+                }
+            }
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private Guna2Button lastClickedButton;
+
+        private void button_MouseEnter(object sender, EventArgs e)
         {
-            //btnClear();
-            //btnDash.BackColor = Color.FromArgb(37, 189, 176);
+            Guna2Button btn = (Guna2Button)sender;
+            btn.BorderColor = Color.FromArgb(37, 189, 176);
+        }
+
+        private void button_MouseLeave(object sender, EventArgs e)
+        {
+            foreach (Control c in buttonPanel.Controls)
+            {
+                if (c != lastClickedButton && c is Guna2Button) // Check for clicked button and Guna2Button type
+                {
+                    ((Guna2Button)c).BorderColor = Color.FromArgb(31, 52, 64); // Set default border color on leave
+                }
+            }
+        }
+
+        private void btnDashboard_Click(object sender, EventArgs e)
+        {
+            Guna2Button clickedButton = (Guna2Button)sender; // Get the clicked button
+            lastClickedButton = clickedButton; // Update the tracked button
+            btnSettings(btnDashboard, null);
             Addcontrols(new frmHome());
+        }
+
+        private void btnProducts_Click(object sender, EventArgs e)
+        {
+            Guna2Button clickedButton = (Guna2Button)sender; // Get the clicked button
+            lastClickedButton = clickedButton; // Update the tracked button
+            btnSettings(btnProducts, null);
+            Addcontrols(new frmProductView());
+            frmProductView frm = new frmProductView();
+            frm.LoadRecords();
         }
 
         private void btnSupplier_Click(object sender, EventArgs e)
         {
-            //btnClear();
-            //btnSupplier.BackColor = Color.FromArgb(37, 189, 176);
+            Guna2Button clickedButton = (Guna2Button)sender; // Get the clicked button
+            lastClickedButton = clickedButton; // Update the tracked button
+            btnSettings(btnSupplier, null);
             Addcontrols(new frmSupplierView());
         }
 
-        private void btnCat_Click(object sender, EventArgs e)
+        private void btnReports_Click(object sender, EventArgs e)
         {
-            //btnClear();
-            //btnCat.BackColor = Color.FromArgb(37, 189, 176);
-            Addcontrols(new frmCategoryView());
+            Guna2Button clickedButton = (Guna2Button)sender; // Get the clicked button
+            lastClickedButton = clickedButton; // Update the tracked button
+            btnSettings(btnReports, null);
         }
 
-        private void button19_Click(object sender, EventArgs e)
+        private void btnUser_Click(object sender, EventArgs e)
         {
-           // btnClear();
-           //button19.BackColor = Color.FromArgb(37, 189, 176);
-            Addcontrols(new frmBrandView());
-        }
-
-        private void btnuser_Click(object sender, EventArgs e)
-        {
-            //btnClear();
-           //btnuser.BackColor = Color.FromArgb(37, 189, 176);
+            Guna2Button clickedButton = (Guna2Button)sender; // Get the clicked button
+            lastClickedButton = clickedButton; // Update the tracked button
+            btnSettings(btnUser, null);
             Addcontrols(new frmUsersView());
         }
 
-        private void btnpro_Click(object sender, EventArgs e)
+        private void guna2Button2_Click(object sender, EventArgs e)
         {
-           // btnClear();
-           // btnProducts.BackColor = Color.FromArgb(37, 189, 176);
-            Addcontrols(new frmProductView());
-            frmProductView frm = new frmProductView();
-            frm.LoadRecords();
-
-        }
-
-        private void btnLogout_Click(object sender, EventArgs e)
-        {
-            //btnClear();
-           // btnLogout.BackColor = Color.FromArgb(37, 189, 176);
+            Guna2Button clickedButton = (Guna2Button)sender; // Get the clicked button
+            lastClickedButton = clickedButton; // Update the tracked button
+            btnSettings(btnLogout, null);
+            this.Hide();
             frmLogin frmLogin = new frmLogin();
             frmLogin.ShowDialog();
-            this.Close();
+        }
+
+        private void guna2Separator1_Click(object sender, EventArgs e)
+        {
 
         }
     }

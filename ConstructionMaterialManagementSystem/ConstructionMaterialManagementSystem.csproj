@@ -110,10 +110,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CodeRepos.cs" />
-    <Compile Include="frmUsersView.cs">
+    <Compile Include="frmMainUser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmUsersView.Designer.cs">
+    <Compile Include="frmMainUser.Designer.cs">
+      <DependentUpon>frmMainUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmUsersView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmUsersView.Designer.cs">
       <DependentUpon>frmUsersView.cs</DependentUpon>
     </Compile>
     <Compile Include="Login\frmForgetPass.cs">
@@ -147,11 +153,11 @@
       <DependentUpon>frmEmail.cs</DependentUpon>
     </Compile>
     <Compile Include="MainClass.cs" />
-    <Compile Include="Model\frmBrandAdd.cs">
+    <Compile Include="Model\frmBrandAdding.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Model\frmBrandAdd.Designer.cs">
-      <DependentUpon>frmBrandAdd.cs</DependentUpon>
+    <Compile Include="Model\frmBrandAdding.Designer.cs">
+      <DependentUpon>frmBrandAdding.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\frmCategoryAdd.cs">
       <SubType>Form</SubType>
@@ -226,7 +232,10 @@
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmUsersView.resx">
+    <EmbeddedResource Include="frmMainUser.resx">
+      <DependentUpon>frmMainUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmUsersView.resx">
       <DependentUpon>frmUsersView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\frmLogin.resx">
@@ -235,8 +244,8 @@
     <EmbeddedResource Include="Login\frmEmail.resx">
       <DependentUpon>frmEmail.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Model\frmBrandAdd.resx">
-      <DependentUpon>frmBrandAdd.cs</DependentUpon>
+    <EmbeddedResource Include="Model\frmBrandAdding.resx">
+      <DependentUpon>frmBrandAdding.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Model\frmCategoryAdd.resx">
       <DependentUpon>frmCategoryAdd.cs</DependentUpon>

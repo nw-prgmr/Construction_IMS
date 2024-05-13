@@ -40,10 +40,10 @@ namespace ConstructionMaterialManagementSystem
             lb.Items.Add(dgvid);
             lb.Items.Add(dgvName);
             lb.Items.Add(dgvUsername);
-            lb.Items.Add(dgvpass);
+            lb.Items.Add(dgvstatus);
             lb.Items.Add(dgvEmail);
 
-            string qry = @"SELECT uID, uName, uPass, username, uEmail FROM tbl_users
+            string qry = @"SELECT uID, uName, username, uStatus, uEmail FROM tbl_users
                              ORDER BY uID desc ";
             MainClass.LoadData(qry, dgvUserView, lb);
         }   

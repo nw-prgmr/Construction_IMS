@@ -33,13 +33,15 @@ namespace ConstructionMaterialManagementSystem.View
         {
             int i = 0;
             guna2DataGridView1.Rows.Clear();
-            cmd = new MySqlCommand("SELECT * FROM tbl_brand ORDER BY bName", con);
+            cmd = new MySqlCommand("SELECT b.bID, b.bName, c.cName " +
+                                   "FROM tbl_brand AS b " +
+                                   "INNER JOIN tbl_category AS c ON c.cID = b.cID", con);
             con.Open();
             dr = cmd.ExecuteReader();
             while (dr.Read())
             {
                 i += 1;
-                guna2DataGridView1.Rows.Add(i, dr[0].ToString(), dr[1].ToString());
+                guna2DataGridView1.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString());
             }
             dr.Close();
             con.Close();
@@ -47,7 +49,10 @@ namespace ConstructionMaterialManagementSystem.View
 
         public override void btnAdd_Click(object sender, EventArgs e)
         {
-            MainClass.BlurBackground(new frmBrandAdd(this));
+            frmBrandAdding frm = new frmBrandAdding(this);
+            frm.btnUpdate.Visible = false;
+            frm.LoadCategory();
+            MainClass.BlurBackground(frm);
             LoadRecords();
         }
 
@@ -62,11 +67,13 @@ namespace ConstructionMaterialManagementSystem.View
             string colName = guna2DataGridView1.Columns[e.ColumnIndex].Name;
             if (colName == "dgvbEdit")
             {
-                frmBrandAdd frm = new frmBrandAdd(this);
-                frm.btnBrandSave.Enabled = false;
+                frmBrandAdding frm = new frmBrandAdding(this);
+                frm.btnSave.Visible = false;
+                frm.LoadCategory();
                 frm.lblBrandId.Text = guna2DataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
                 frm.txtBrandName.Text = guna2DataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                MainClass.BlurBackground(new frmBrandAdd(this));
+                frm.cbobCategory.Text = guna2DataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
+                MainClass.BlurBackground(frm);
             }
             else if (colName == "dgvbDel")
             {

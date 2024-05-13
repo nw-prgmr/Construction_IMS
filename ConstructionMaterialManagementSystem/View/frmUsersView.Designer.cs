@@ -36,7 +36,7 @@
             this.dgvid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvUsername = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvpass = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvstatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvedit = new System.Windows.Forms.DataGridViewImageColumn();
             this.dgvdel = new System.Windows.Forms.DataGridViewImageColumn();
@@ -73,7 +73,7 @@
             this.dgvid,
             this.dgvName,
             this.dgvUsername,
-            this.dgvpass,
+            this.dgvstatus,
             this.dgvEmail,
             this.dgvedit,
             this.dgvdel});
@@ -149,12 +149,12 @@
             this.dgvUsername.Name = "dgvUsername";
             this.dgvUsername.ReadOnly = true;
             // 
-            // dgvpass
+            // dgvstatus
             // 
-            this.dgvpass.HeaderText = "Password";
-            this.dgvpass.MinimumWidth = 6;
-            this.dgvpass.Name = "dgvpass";
-            this.dgvpass.ReadOnly = true;
+            this.dgvstatus.HeaderText = "Status";
+            this.dgvstatus.MinimumWidth = 6;
+            this.dgvstatus.Name = "dgvstatus";
+            this.dgvstatus.ReadOnly = true;
             // 
             // dgvEmail
             // 
@@ -214,7 +214,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvid;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvName;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvUsername;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvpass;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvstatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvEmail;
         private System.Windows.Forms.DataGridViewImageColumn dgvedit;
         private System.Windows.Forms.DataGridViewImageColumn dgvdel;

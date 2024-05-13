@@ -92,14 +92,18 @@ namespace ConstructionMaterialManagementSystem.View
             {
                 frmProductAd frm = new frmProductAd(this);
                 frm.btnSave.Visible = false;
+                frm.LoadCategory();
+                frm.LoadBrand();
+                frm.LoadSupplier();
+                frm.lblProduct.Text = dgvProduct.Rows[e.RowIndex].Cells[1].Value.ToString();
                 frm.txtProName.Text = dgvProduct.Rows[e.RowIndex].Cells[2].Value.ToString();
-                frm.txtProDesc.Text = dgvProduct.Rows[e.RowIndex].Cells[5].Value.ToString();
-                frm.txtProCost.Text = dgvProduct.Rows[e.RowIndex].Cells[6].Value.ToString();
-                frm.txtProStock.Text = dgvProduct.Rows[e.RowIndex].Cells[7].Value.ToString();
+                frm.txtProDesc.Text = dgvProduct.Rows[e.RowIndex].Cells[6].Value.ToString();
+                frm.txtProCost.Text = dgvProduct.Rows[e.RowIndex].Cells[7].Value.ToString();
+                frm.txtProStock.Text = dgvProduct.Rows[e.RowIndex].Cells[8].Value.ToString();
                 frm.cboBrand.Text = dgvProduct.Rows[e.RowIndex].Cells[4].Value.ToString();
                 frm.cboCategory.Text = dgvProduct.Rows[e.RowIndex].Cells[3].Value.ToString();
                 frm.cboSupplier.Text = dgvProduct.Rows[e.RowIndex].Cells[5].Value.ToString();
-                frm.ShowDialog();
+                MainClass.BlurBackground(frm);
             }
             else if (colName == "dgvdel")
             {

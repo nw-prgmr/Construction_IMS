@@ -67,7 +67,9 @@ namespace ConstructionMaterialManagementSystem.Model
             try
             {
                 con.Open();
-                cmd = new MySqlCommand("UPDATE tbl_category SET cName = '" + txtcName.Text + "' WHERE cID LIKE '" + lblcatId.Text + "' ", con);
+                cmd = new MySqlCommand("UPDATE tbl_category SET cName = @cName WHERE cID LIKE @cID ", con);
+                cmd.Parameters.AddWithValue("@cName", txtcName.Text);
+                cmd.Parameters.AddWithValue("@cID", lblcatId.Text);
                 cmd.ExecuteNonQuery();
                 con.Close();
                 gmdSampleAdd.Show("Successfully Updated.", "Category Update");
