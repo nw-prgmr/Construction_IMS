@@ -16,5 +16,10 @@ namespace ConstructionMaterialManagementSystem
         {
             InitializeComponent();
         }
+
+        private void btnUser_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

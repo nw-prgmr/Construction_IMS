@@ -25,7 +25,9 @@ namespace ConstructionMaterialManagementSystem
 
         public override void btnAdd_Click(object sender, EventArgs e)
         {
-            MainClass.BlurBackground(new frmUserAdd());
+            frmUserAdd frm = new frmUserAdd();
+            frm.btnUpdate.Visible = false;
+            MainClass.BlurBackground(frm);
             LoadData();
         }
 

@@ -75,8 +75,7 @@ namespace ConstructionMaterialManagementSystem.Model
             try
             {
                 con.Open();
-                cmd = new MySqlCommand("UPDATE tbl_supplier SET (sName, sContact_person, sEmail, sPhone, sAddress) " +
-                            "VALUES (@sName, @sContact_person, @sEmail, @sPhone, @sAddress)", con);
+                cmd = new MySqlCommand("UPDATE tbl_supplier SET sName = @sName, sContact_person = @sContact_person, sEmail = @sEmail, sPhone = @sPhone, sAddress = @sAddress", con);
                 cmd.Parameters.AddWithValue("@sName", txtsName.Text);
                 cmd.Parameters.AddWithValue("@sContact_person", txtsConPerson.Text);
                 cmd.Parameters.AddWithValue("@sEmail", txtsEmail.Text);

@@ -147,9 +147,12 @@ namespace ConstructionMaterialManagementSystem
             frmLogin.ShowDialog();
         }
 
-        private void guna2Separator1_Click(object sender, EventArgs e)
-        {
 
+        private void btnPOS_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmPOS pos = new frmPOS();
+            pos.ShowDialog();
         }
     }
 }

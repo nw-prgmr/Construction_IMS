@@ -60,7 +60,7 @@ namespace ConstructionMaterialManagementSystem
             catch (Exception ex)
             {
                 // Handle or log the exception
-                Console.WriteLine("An error occurred: " + ex.Message);
+                MessageBox.Show("An error occurred: " + ex.Message);
             }
 
             return isValid;

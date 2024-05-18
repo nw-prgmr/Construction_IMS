@@ -112,7 +112,7 @@ namespace ConstructionMaterialManagementSystem.View
                 if (guna2MessageDialog1.Show("Are you sure you want to delete?") == DialogResult.Yes)
                 {
                     con.Open();
-                    cmd = new MySqlCommand("DELETE FROM category WHERE catID LIKE '" + dgvProduct.Rows[e.RowIndex].Cells[1].Value.ToString() + "' ", con);
+                    cmd = new MySqlCommand("DELETE FROM tbl_products WHERE pID LIKE '" + dgvProduct.Rows[e.RowIndex].Cells[1].Value.ToString() + "' ", con);
                     cmd.ExecuteNonQuery();
                     con.Close();
 

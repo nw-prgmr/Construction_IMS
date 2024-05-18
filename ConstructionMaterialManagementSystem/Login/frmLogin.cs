@@ -68,7 +68,7 @@ namespace ConstructionMaterialManagementSystem
                 return;
             }
 
-            else if (MainClass.IsValidUser(txtUsername.Text, txtPassword.Text) == false)
+            if (MainClass.IsValidUser(txtUsername.Text, txtPassword.Text) == false)
             {
                 lblMessage.Text = "Invalid Username or Password";
                 return;
@@ -76,9 +76,9 @@ namespace ConstructionMaterialManagementSystem
 
             else
             {
-                this.Hide();
-                frmDashboard frmDashboard = new frmDashboard();
-                frmDashboard.ShowDialog();
+                    this.Hide();
+                    frmDashboard frmDashboard = new frmDashboard();
+                    frmDashboard.ShowDialog();
             }
 
             

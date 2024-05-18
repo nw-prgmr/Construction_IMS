@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.btnProBrowse = new Guna.UI2.WinForms.Guna2Button();
             this.cboBrand = new Guna.UI2.WinForms.Guna2ComboBox();
             this.cboCategory = new Guna.UI2.WinForms.Guna2ComboBox();
@@ -45,9 +44,11 @@
             this.Supplier = new System.Windows.Forms.Label();
             this.cboSupplier = new Guna.UI2.WinForms.Guna2ComboBox();
             this.lblProduct = new System.Windows.Forms.Label();
+            this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -69,19 +70,6 @@
             this.panel1.Size = new System.Drawing.Size(639, 116);
             this.panel1.TabIndex = 15;
             // 
-            // guna2CirclePictureBox1
-            // 
-            this.guna2CirclePictureBox1.BackColor = System.Drawing.Color.Gray;
-            this.guna2CirclePictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.guna2CirclePictureBox1.FillColor = System.Drawing.Color.Transparent;
-            this.guna2CirclePictureBox1.ImageRotate = 0F;
-            this.guna2CirclePictureBox1.Location = new System.Drawing.Point(459, 216);
-            this.guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
-            this.guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CirclePictureBox1.Size = new System.Drawing.Size(126, 113);
-            this.guna2CirclePictureBox1.TabIndex = 24;
-            this.guna2CirclePictureBox1.TabStop = false;
-            // 
             // btnProBrowse
             // 
             this.btnProBrowse.AutoRoundedCorners = true;
@@ -94,11 +82,12 @@
             this.btnProBrowse.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(191)))), ((int)(((byte)(67)))));
             this.btnProBrowse.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnProBrowse.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.btnProBrowse.Location = new System.Drawing.Point(466, 345);
+            this.btnProBrowse.Location = new System.Drawing.Point(465, 349);
             this.btnProBrowse.Name = "btnProBrowse";
             this.btnProBrowse.Size = new System.Drawing.Size(111, 30);
             this.btnProBrowse.TabIndex = 7;
             this.btnProBrowse.Text = "BROWSE";
+            this.btnProBrowse.Click += new System.EventHandler(this.btnProBrowse_Click);
             // 
             // cboBrand
             // 
@@ -327,13 +316,31 @@
             this.lblProduct.Text = "ProID";
             this.lblProduct.Visible = false;
             // 
+            // guna2PictureBox1
+            // 
+            this.guna2PictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2PictureBox1.FillColor = System.Drawing.Color.Transparent;
+            this.guna2PictureBox1.Image = global::ConstructionMaterialManagementSystem.Properties.Resources.portfolio;
+            this.guna2PictureBox1.ImageRotate = 0F;
+            this.guna2PictureBox1.Location = new System.Drawing.Point(458, 212);
+            this.guna2PictureBox1.Name = "guna2PictureBox1";
+            this.guna2PictureBox1.Size = new System.Drawing.Size(130, 130);
+            this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.guna2PictureBox1.TabIndex = 17;
+            this.guna2PictureBox1.TabStop = false;
+            this.guna2PictureBox1.UseTransparentBackground = true;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // frmProductAd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(639, 618);
-            this.Controls.Add(this.guna2CirclePictureBox1);
+            this.Controls.Add(this.guna2PictureBox1);
             this.Controls.Add(this.btnProBrowse);
             this.Controls.Add(this.cboBrand);
             this.Controls.Add(this.cboSupplier);
@@ -368,20 +375,18 @@
             this.Controls.SetChildIndex(this.cboSupplier, 0);
             this.Controls.SetChildIndex(this.cboBrand, 0);
             this.Controls.SetChildIndex(this.btnProBrowse, 0);
-            this.Controls.SetChildIndex(this.guna2CirclePictureBox1, 0);
+            this.Controls.SetChildIndex(this.guna2PictureBox1, 0);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        public Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox1;
         public Guna.UI2.WinForms.Guna2Button btnProBrowse;
         public Guna.UI2.WinForms.Guna2ComboBox cboBrand;
         public Guna.UI2.WinForms.Guna2ComboBox cboCategory;
@@ -398,5 +403,7 @@
         private System.Windows.Forms.Label Supplier;
         public Guna.UI2.WinForms.Guna2ComboBox cboSupplier;
         public System.Windows.Forms.Label lblProduct;
+        private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }

@@ -11,6 +11,8 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using TheArtOfDevHtmlRenderer.Adapters;
 
 namespace ConstructionMaterialManagementSystem.Model
 {
@@ -97,6 +99,10 @@ namespace ConstructionMaterialManagementSystem.Model
 
                 try
                 {
+                    MemoryStream ms = new MemoryStream();
+                    guna2PictureBox1.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    byte[] arrImage = ms.GetBuffer();
+
                     con.Open();
                     cmd = new MySqlCommand("SELECT cID FROM tbl_category WHERE cName LIKE '" + cboCategory.Text + "' ", con);
                     dr = cmd.ExecuteReader();
@@ -121,11 +127,12 @@ namespace ConstructionMaterialManagementSystem.Model
                     dr.Close();
                     con.Close();
 
+                    
 
                     // Insert product
                     con.Open();
                     //cmd = new MySqlCommand("INSERT INTO tbl_products (pName, pDescription, cID, bID, sID, pCost, pStock) VALUES (@pName, @pDescription, @pCatID, @pBrandID, @pSupplierID, @pCost, @pStock)", con);
-                    cmd = new MySqlCommand("INSERT INTO tbl_products (pName, pDescription, cID, bID, sID, pCost, pStock) VALUES (@pName, @pDescription, @pCatID, @pBrandID, @pSupplierID, @pCost, @pStock)", con);
+                    cmd = new MySqlCommand("INSERT INTO tbl_products (pName, pDescription, cID, bID, sID, pCost, pStock, pImage) VALUES (@pName, @pDescription, @pCatID, @pBrandID, @pSupplierID, @pCost, @pStock, @pImage)", con);
                     cmd.Parameters.AddWithValue("@pName", txtProName.Text);
                     cmd.Parameters.AddWithValue("@pDescription", txtProDesc.Text); 
                     cmd.Parameters.AddWithValue("@pCatID", Convert.ToInt32(cid));
@@ -133,7 +140,7 @@ namespace ConstructionMaterialManagementSystem.Model
                     cmd.Parameters.AddWithValue("@pSupplierID", Convert.ToInt32(sid));
                     cmd.Parameters.AddWithValue("@pCost",  Convert.ToDouble(txtProCost.Text));
                     cmd.Parameters.AddWithValue("@pStock", Convert.ToUInt32(txtProStock.Text));
-
+                    cmd.Parameters.AddWithValue("@pImage", arrImage);
                     cmd.ExecuteNonQuery();
 
                     
@@ -171,6 +178,10 @@ namespace ConstructionMaterialManagementSystem.Model
 
                 try
                 {
+                    MemoryStream ms = new MemoryStream();
+                    guna2PictureBox1.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    byte[] arrImage = ms.GetBuffer();
+
                     con.Open();
                     cmd = new MySqlCommand("SELECT cID FROM tbl_category WHERE cName LIKE '" + cboCategory.Text + "' ", con);
                     dr = cmd.ExecuteReader();
@@ -199,7 +210,7 @@ namespace ConstructionMaterialManagementSystem.Model
                     // Insert product
                     con.Open();
                     //cmd = new MySqlCommand("INSERT INTO tbl_products (pName, pDescription, cID, bID, sID, pCost, pStock) VALUES (@pName, @pDescription, @pCatID, @pBrandID, @pSupplierID, @pCost, @pStock)", con);
-                    cmd = new MySqlCommand("UPDATE tbl_products SET pName = @pName, pDescription = @pDescription, cID = @pCatID, bID = @pBrandID, sID = @pSupplierID, pCost = @pCost, pStock = @pStock  WHERE pID LIKE @pID", con);
+                    cmd = new MySqlCommand("UPDATE tbl_products SET pName = @pName, pDescription = @pDescription, cID = @pCatID, bID = @pBrandID, sID = @pSupplierID, pCost = @pCost, pStock = @pStock, pImage = @pImage  WHERE pID LIKE @pID", con);
                     cmd.Parameters.AddWithValue("@pID", lblProduct.Text);
                     cmd.Parameters.AddWithValue("@pName", txtProName.Text);
                     cmd.Parameters.AddWithValue("@pDescription", txtProDesc.Text);
@@ -208,7 +219,7 @@ namespace ConstructionMaterialManagementSystem.Model
                     cmd.Parameters.AddWithValue("@pSupplierID", sid);
                     cmd.Parameters.AddWithValue("@pCost", Convert.ToDouble(txtProCost.Text));
                     cmd.Parameters.AddWithValue("@pStock", Convert.ToUInt32(txtProStock.Text));
-
+                    cmd.Parameters.AddWithValue("@pImage", arrImage);
                     cmd.ExecuteNonQuery();
 
 
@@ -231,7 +242,12 @@ namespace ConstructionMaterialManagementSystem.Model
                 
         }
 
-
+        private void btnProBrowse_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Filter = "Image files (*.png) |*.png| (*.jpg) |*.jpg| (*.gif) |*.gif";
+            openFileDialog1.ShowDialog();
+            guna2PictureBox1.Image = Image.FromFile(openFileDialog1.FileName);
+        }
     }
 }
 

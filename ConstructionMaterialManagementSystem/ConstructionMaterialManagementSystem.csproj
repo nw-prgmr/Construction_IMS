@@ -116,6 +116,30 @@
     <Compile Include="frmMainUser.Designer.cs">
       <DependentUpon>frmMainUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPOS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPOS.Designer.cs">
+      <DependentUpon>frmPOS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\frmMyOrderAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Model\frmMyOrderAdd.Designer.cs">
+      <DependentUpon>frmMyOrderAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucProduct.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucProduct.Designer.cs">
+      <DependentUpon>ucProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmMyOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmMyOrders.Designer.cs">
+      <DependentUpon>frmMyOrders.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\frmUsersView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -234,6 +258,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMainUser.resx">
       <DependentUpon>frmMainUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPOS.resx">
+      <DependentUpon>frmPOS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model\frmMyOrderAdd.resx">
+      <DependentUpon>frmMyOrderAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucProduct.resx">
+      <DependentUpon>ucProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmMyOrders.resx">
+      <DependentUpon>frmMyOrders.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\frmUsersView.resx">
       <DependentUpon>frmUsersView.cs</DependentUpon>
@@ -355,6 +391,33 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8-hammer-100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\portfolio.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Move Up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-store-setting-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-supplier-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Business Report1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-users-60.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-pos-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-back-100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-construction-100.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
