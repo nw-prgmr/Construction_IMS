@@ -18,11 +18,11 @@ namespace ConstructionMaterialManagementSystem
     {
         public string dbconnect()
         {
-            string con = "server = localhost; user id = root; password=; database = construction_ims;";
+            string con = "server = localhost; user id = root; password=; database = contruction_ims;";
                 return con;
         }
 
-        public static readonly string con_string = "server = localhost; user id = root; password=; database = construction_ims;";
+        public static readonly string con_string = "server = localhost; user id = root; password=; database = contruction_ims;";
         public static MySqlConnection con = new MySqlConnection(con_string);
 
 
@@ -163,7 +163,7 @@ namespace ConstructionMaterialManagementSystem
                 Background.FormBorderStyle = FormBorderStyle.None;
                 Background.Opacity = 0.5d;
                 Background.BackColor = Color.Black;
-                Background.Size = frmMain.Instance.Size;
+                Background.Size = frmDashboard.Instance.Size;
                 Background.StartPosition = FormStartPosition.CenterScreen;
                 Background.ShowInTaskbar = false;
                 Background.Show();
