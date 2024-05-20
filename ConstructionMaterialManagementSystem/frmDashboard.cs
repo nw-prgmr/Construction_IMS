@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ConstructionMaterialManagementSystem
 {
-    public partial class frmHome : Form
+    public partial class frmDashboard : Form
     {
-        public frmHome()
+        public frmDashboard()
         {
             InitializeComponent();
         }

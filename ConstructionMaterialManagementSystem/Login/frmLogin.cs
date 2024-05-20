@@ -61,7 +61,7 @@ namespace ConstructionMaterialManagementSystem
 
                 else
                 {
-                    frmDashboard dashboard = new frmDashboard();
+                    frmMain dashboard = new frmMain();
                     dashboard.Show();
                     this.Hide();
                 }
@@ -220,7 +220,7 @@ namespace ConstructionMaterialManagementSystem
         private void lnkFP_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             frmEmail FP = new frmEmail();
-            FP.Show();
+            MainClass.BlurBackground(FP);
         }
 
         private void pictureBox3_Click(object sender, EventArgs e)

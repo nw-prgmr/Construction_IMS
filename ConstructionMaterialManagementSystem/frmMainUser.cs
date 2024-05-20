@@ -15,11 +15,29 @@ namespace ConstructionMaterialManagementSystem
         public frmMainUser()
         {
             InitializeComponent();
+            btnHome.BorderColor = Color.FromArgb(37, 189, 176);
+            btnHome.FillColor = Color.FromArgb(37, 189, 176);
+            Addcontrols(new frmDashboard());
         }
 
-        private void btnUser_Click(object sender, EventArgs e)
+        public void Addcontrols(Form f)
         {
+            ControlPanelu.Controls.Clear();
+            f.Dock = DockStyle.Fill;
+            f.TopLevel = false;
+            ControlPanelu.Controls.Add(f);
+            f.Show();
+        }
 
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+            Addcontrols(new frmDashboard());
+        }
+
+        private void btnProduct_Click(object sender, EventArgs e)
+        {
+            frmPOS pos = new frmPOS();
+            pos.Show();
         }
     }
 }

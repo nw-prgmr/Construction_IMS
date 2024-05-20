@@ -13,15 +13,15 @@ using System.Windows.Forms;
 
 namespace ConstructionMaterialManagementSystem
 {
-    public partial class frmDashboard : Form
+    public partial class frmMain : Form
     {
 
-        public frmDashboard()
+        public frmMain()
         {
             InitializeComponent();
             btnDashboard.BorderColor = Color.FromArgb(37, 189, 176);
             btnDashboard.FillColor = Color.FromArgb(37, 189, 176);
-            Addcontrols(new frmHome());
+            Addcontrols(new frmDashboard());
         }
 
         //Add controls to the mainform
@@ -38,9 +38,9 @@ namespace ConstructionMaterialManagementSystem
         {
             foreach (Control c in buttonPanel.Controls)
             {
-                if (c is Guna2Button) // Check for Guna2Button type
+                if (c is Guna2Button)
                 {
-                    ((Guna2Button)c).FillColor = Color.FromArgb(31, 52, 64); // Use FillColor for Guna2Button
+                    ((Guna2Button)c).FillColor = Color.FromArgb(31, 52, 64); 
                 }
             }
 
@@ -48,15 +48,15 @@ namespace ConstructionMaterialManagementSystem
             Guna2Button clickedButton = (Guna2Button)sender;
             if (clickedButton != null) // Check if button was clicked (sender might be null)
             {
-                clickedButton.FillColor = Color.FromArgb(37, 189, 176); // Set clicked button color
+                clickedButton.FillColor = Color.FromArgb(37, 189, 176);
             }
         }
 
         // for instance
-        static frmDashboard _obj;
-        public static frmDashboard Instance 
+        static frmMain _obj;
+        public static frmMain Instance 
         {
-            get { if (_obj == null) {_obj = new frmDashboard(); } return _obj; }
+            get { if (_obj == null) {_obj = new frmMain(); } return _obj; }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -73,10 +73,10 @@ namespace ConstructionMaterialManagementSystem
 
             foreach (Control c in buttonPanel.Controls)
             {
-                if (c is Guna2Button) // Check for Guna2Button type
+                if (c is Guna2Button)
                 {
-                    ((Guna2Button)c).MouseEnter += new EventHandler(button_MouseEnter); // Attach individual hover event
-                    ((Guna2Button)c).MouseLeave += new EventHandler(button_MouseLeave); // Attach individual leave event
+                    ((Guna2Button)c).MouseEnter += new EventHandler(button_MouseEnter); 
+                    ((Guna2Button)c).MouseLeave += new EventHandler(button_MouseLeave); 
                 }
             }
         }
@@ -93,25 +93,25 @@ namespace ConstructionMaterialManagementSystem
         {
             foreach (Control c in buttonPanel.Controls)
             {
-                if (c != lastClickedButton && c is Guna2Button) // Check for clicked button and Guna2Button type
+                if (c != lastClickedButton && c is Guna2Button) 
                 {
-                    ((Guna2Button)c).BorderColor = Color.FromArgb(31, 52, 64); // Set default border color on leave
+                    ((Guna2Button)c).BorderColor = Color.FromArgb(31, 52, 64);
                 }
             }
         }
 
         private void btnDashboard_Click(object sender, EventArgs e)
         {
-            Guna2Button clickedButton = (Guna2Button)sender; // Get the clicked button
-            lastClickedButton = clickedButton; // Update the tracked button
+            Guna2Button clickedButton = (Guna2Button)sender; 
+            lastClickedButton = clickedButton; 
             btnSettings(btnDashboard, null);
-            Addcontrols(new frmHome());
+            Addcontrols(new frmDashboard());
         }
 
         private void btnProducts_Click(object sender, EventArgs e)
         {
-            Guna2Button clickedButton = (Guna2Button)sender; // Get the clicked button
-            lastClickedButton = clickedButton; // Update the tracked button
+            Guna2Button clickedButton = (Guna2Button)sender; 
+            lastClickedButton = clickedButton; 
             btnSettings(btnProducts, null);
             Addcontrols(new frmProductView());
             frmProductView frm = new frmProductView();
@@ -120,31 +120,31 @@ namespace ConstructionMaterialManagementSystem
 
         private void btnSupplier_Click(object sender, EventArgs e)
         {
-            Guna2Button clickedButton = (Guna2Button)sender; // Get the clicked button
-            lastClickedButton = clickedButton; // Update the tracked button
+            Guna2Button clickedButton = (Guna2Button)sender; 
+            lastClickedButton = clickedButton; 
             btnSettings(btnSupplier, null);
             Addcontrols(new frmSupplierView());
         }
 
         private void btnReports_Click(object sender, EventArgs e)
         {
-            Guna2Button clickedButton = (Guna2Button)sender; // Get the clicked button
-            lastClickedButton = clickedButton; // Update the tracked button
+            Guna2Button clickedButton = (Guna2Button)sender; 
+            lastClickedButton = clickedButton; 
             btnSettings(btnReports, null);
         }
 
         private void btnUser_Click(object sender, EventArgs e)
         {
-            Guna2Button clickedButton = (Guna2Button)sender; // Get the clicked button
-            lastClickedButton = clickedButton; // Update the tracked button
+            Guna2Button clickedButton = (Guna2Button)sender; 
+            lastClickedButton = clickedButton; 
             btnSettings(btnUser, null);
             Addcontrols(new frmUsersView());
         }
 
         private void guna2Button2_Click(object sender, EventArgs e)
         {
-            Guna2Button clickedButton = (Guna2Button)sender; // Get the clicked button
-            lastClickedButton = clickedButton; // Update the tracked button
+            Guna2Button clickedButton = (Guna2Button)sender; 
+            lastClickedButton = clickedButton; 
             btnSettings(btnLogout, null);
             this.Hide();
             frmLogin frmLogin = new frmLogin();

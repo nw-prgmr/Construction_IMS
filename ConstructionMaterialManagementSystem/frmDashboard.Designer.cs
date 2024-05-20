@@ -1,6 +1,6 @@
 ﻿namespace ConstructionMaterialManagementSystem
 {
-    partial class frmHome
+    partial class frmDashboard
     {
         /// <summary>
         /// Required designer variable.
