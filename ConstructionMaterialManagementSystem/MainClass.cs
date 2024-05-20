@@ -14,15 +14,15 @@ using System.Windows.Forms;
 using System.IO;
 namespace ConstructionMaterialManagementSystem
 {
-    internal class MainClass
+    public class MainClass
     {
         public string dbconnect()
         {
-            string con = "server = localhost; user id = root; password=; database = contruction_ims;";
+            string con = "server = localhost; user id = root; password=; database = construction_ims;";
                 return con;
         }
 
-        public static readonly string con_string = "server = localhost; user id = root; password=; database = contruction_ims;";
+        public static readonly string con_string = "server = localhost; user id = root; password=; database = construction_ims;";
         public static MySqlConnection con = new MySqlConnection(con_string);
 
 
