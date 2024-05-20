@@ -29,20 +29,21 @@ namespace ConstructionMaterialManagementSystem.View
         {
             int i = 0;
             guna2DataGridView1.Rows.Clear();
-            cmd = new MySqlCommand("SELECT b.bID, b.bName, c.cName " +
-                                   "FROM tbl_brand AS b " +
-                                   "INNER JOIN tbl_category AS c ON c.cID = b.cID", con);
+            cmd = new MySqlCommand("SELECT moID, moDate, mopName, moQty, moSite FROM tbl_myorder", con);
             con.Open();
             dr = cmd.ExecuteReader();
             while (dr.Read())
             {
                 i += 1;
-                guna2DataGridView1.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString());
+                guna2DataGridView1.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString());
             }
             dr.Close();
             con.Close();
         }
 
-
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

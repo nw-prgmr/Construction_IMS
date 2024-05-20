@@ -44,11 +44,11 @@
             this.Supplier = new System.Windows.Forms.Label();
             this.cboSupplier = new Guna.UI2.WinForms.Guna2ComboBox();
             this.lblProduct = new System.Windows.Forms.Label();
-            this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.ProductPicture = new Guna.UI2.WinForms.Guna2PictureBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ProductPicture)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -316,19 +316,19 @@
             this.lblProduct.Text = "ProID";
             this.lblProduct.Visible = false;
             // 
-            // guna2PictureBox1
+            // ProductPicture
             // 
-            this.guna2PictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2PictureBox1.FillColor = System.Drawing.Color.Transparent;
-            this.guna2PictureBox1.Image = global::ConstructionMaterialManagementSystem.Properties.Resources.portfolio;
-            this.guna2PictureBox1.ImageRotate = 0F;
-            this.guna2PictureBox1.Location = new System.Drawing.Point(458, 212);
-            this.guna2PictureBox1.Name = "guna2PictureBox1";
-            this.guna2PictureBox1.Size = new System.Drawing.Size(130, 130);
-            this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.guna2PictureBox1.TabIndex = 17;
-            this.guna2PictureBox1.TabStop = false;
-            this.guna2PictureBox1.UseTransparentBackground = true;
+            this.ProductPicture.BackColor = System.Drawing.Color.Transparent;
+            this.ProductPicture.FillColor = System.Drawing.Color.Transparent;
+            this.ProductPicture.Image = global::ConstructionMaterialManagementSystem.Properties.Resources.portfolio;
+            this.ProductPicture.ImageRotate = 0F;
+            this.ProductPicture.Location = new System.Drawing.Point(458, 212);
+            this.ProductPicture.Name = "ProductPicture";
+            this.ProductPicture.Size = new System.Drawing.Size(130, 130);
+            this.ProductPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.ProductPicture.TabIndex = 17;
+            this.ProductPicture.TabStop = false;
+            this.ProductPicture.UseTransparentBackground = true;
             // 
             // openFileDialog1
             // 
@@ -340,7 +340,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(639, 618);
-            this.Controls.Add(this.guna2PictureBox1);
+            this.Controls.Add(this.ProductPicture);
             this.Controls.Add(this.btnProBrowse);
             this.Controls.Add(this.cboBrand);
             this.Controls.Add(this.cboSupplier);
@@ -375,12 +375,12 @@
             this.Controls.SetChildIndex(this.cboSupplier, 0);
             this.Controls.SetChildIndex(this.cboBrand, 0);
             this.Controls.SetChildIndex(this.btnProBrowse, 0);
-            this.Controls.SetChildIndex(this.guna2PictureBox1, 0);
+            this.Controls.SetChildIndex(this.ProductPicture, 0);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ProductPicture)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -403,7 +403,7 @@
         private System.Windows.Forms.Label Supplier;
         public Guna.UI2.WinForms.Guna2ComboBox cboSupplier;
         public System.Windows.Forms.Label lblProduct;
-        private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        public Guna.UI2.WinForms.Guna2PictureBox ProductPicture;
     }
 }

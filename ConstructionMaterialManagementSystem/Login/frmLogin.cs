@@ -13,41 +13,25 @@ namespace ConstructionMaterialManagementSystem
 {
     public partial class frmLogin : Form
     {
-        /*
-        private const string SERVER = "localhost";
-        private const string DATABASE = "inventoryms";
-        private const string UID = "root";
-        private const string PASSWORD = "";
-
-        private static readonly string connectionString = $"Server={SERVER};Database={DATABASE};Uid={UID};Pwd={PASSWORD};";
-        */
-
-
+       
         public void user_focus()
         {
-            txtUsername.BackColor = Color.FromArgb(23, 32, 42);
-            panel3.BackColor = Color.FromArgb(23, 32, 42);
-            panel4.BackColor = Color.FromArgb(31, 52, 64);
-            txtPassword.BackColor = Color.FromArgb(31, 52, 64);
             txtPassword.UseSystemPasswordChar = false;
             txtPassword.Text = "Password";
         }
 
-        public void pass_focus()
-        {
-            txtPassword.BackColor = Color.FromArgb(23, 32, 42);
-            panel4.BackColor = Color.FromArgb(23, 32, 42);
-            panel3.BackColor = Color.FromArgb(31, 52, 64);
-            txtUsername.BackColor = Color.FromArgb(31, 52, 64);
-        }
 
         public frmLogin()
         {
             InitializeComponent();
+            lblMessage.Text = "";
         }
 
         private void btnLogin_Click_1(object sender, EventArgs e)
         {
+            btnLogin.FillColor = Color.FromArgb(86, 215, 180);
+            btnLogin.ForeColor = Color.FromArgb(31, 52, 64);
+
             if (txtUsername.Text == "Username")
             {
                 txtUsername.Text = "";
@@ -59,7 +43,8 @@ namespace ConstructionMaterialManagementSystem
             }
 
             string username = txtUsername.Text.Trim();
-            string password = txtPassword.Text.Trim();
+            string password = txtPassword.Text;
+
             if (string.IsNullOrEmpty(username) && string.IsNullOrEmpty(password))
             {
                 lblMessage.Text = "Please enter both username and password.";
@@ -67,20 +52,23 @@ namespace ConstructionMaterialManagementSystem
                 txtPassword.Text = "Password";
                 return;
             }
+            
+                if (MainClass.IsValidUser(txtUsername.Text, txtPassword.Text) == false)
+                {
+                    lblMessage.Text = "Invalid Username or Password";
+                    return;
+                }
 
-            if (MainClass.IsValidUser(txtUsername.Text, txtPassword.Text) == false)
-            {
-                lblMessage.Text = "Invalid Username or Password";
-                return;
-            }
-
-            else
-            {
+                else
+                {
+                    frmDashboard dashboard = new frmDashboard();
+                    dashboard.Show();
                     this.Hide();
-                    frmDashboard frmDashboard = new frmDashboard();
-                    frmDashboard.ShowDialog();
-            }
+                }
+            
 
+          
+            
             
             /*
             try
@@ -149,7 +137,6 @@ namespace ConstructionMaterialManagementSystem
 
         private void txtPassword_Click(object sender, EventArgs e)
         {
-            pass_focus();
         }
 
         private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
@@ -236,5 +223,27 @@ namespace ConstructionMaterialManagementSystem
             FP.Show();
         }
 
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtUsername_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtPassword.Focus();
+            }
+        }
+
+        private void txtPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnLogin.PerformClick();
+                btnLogin.FillColor = Color.FromArgb(86, 215, 180);
+                btnLogin.ForeColor = Color.FromArgb(31, 52, 64);
+            }
+        }
     }
 }

@@ -1,6 +1,6 @@
-﻿namespace ConstructionMaterialManagementSystem.View
+﻿namespace ConstructionMaterialManagementSystem.Order_Process
 {
-    partial class frmMyOrders
+    partial class frmToShip
     {
         /// <summary>
         /// Required designer variable.
@@ -34,30 +34,36 @@
             this.guna2DataGridView1 = new Guna.UI2.WinForms.Guna2DataGridView();
             this.dgvNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvbName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvsite = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvbDel = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dgvQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2DataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.Color.Transparent;
-            this.panel3.Location = new System.Drawing.Point(0, 587);
-            this.panel3.Size = new System.Drawing.Size(986, 10);
+            this.panel3.Location = new System.Drawing.Point(0, 568);
+            this.panel3.Size = new System.Drawing.Size(420, 10);
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(17, 42);
-            this.label1.Size = new System.Drawing.Size(153, 41);
-            this.label1.Text = "My Order";
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(118, 14);
+            this.label1.Size = new System.Drawing.Size(107, 38);
+            this.label1.Text = "To Ship";
             // 
             // panel1
             // 
-            this.panel1.Size = new System.Drawing.Size(986, 116);
+            this.panel1.Controls.Add(this.pictureBox2);
+            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Size = new System.Drawing.Size(420, 116);
+            this.panel1.Controls.SetChildIndex(this.label1, 0);
+            this.panel1.Controls.SetChildIndex(this.pictureBox1, 0);
+            this.panel1.Controls.SetChildIndex(this.pictureBox2, 0);
             // 
             // guna2DataGridView1
             // 
@@ -66,9 +72,6 @@
             this.guna2DataGridView1.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
             this.guna2DataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.guna2DataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(191)))), ((int)(((byte)(67)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -81,10 +84,8 @@
             this.guna2DataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgvNo,
             this.dgvID,
-            this.dgvcategory,
             this.dgvbName,
-            this.dgvsite,
-            this.dgvbDel});
+            this.dgvQty});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -93,15 +94,16 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.guna2DataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
+            this.guna2DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2DataGridView1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.guna2DataGridView1.Location = new System.Drawing.Point(12, 134);
+            this.guna2DataGridView1.Location = new System.Drawing.Point(0, 116);
             this.guna2DataGridView1.Name = "guna2DataGridView1";
             this.guna2DataGridView1.ReadOnly = true;
             this.guna2DataGridView1.RowHeadersVisible = false;
             this.guna2DataGridView1.RowHeadersWidth = 51;
             this.guna2DataGridView1.RowTemplate.Height = 24;
-            this.guna2DataGridView1.Size = new System.Drawing.Size(962, 436);
-            this.guna2DataGridView1.TabIndex = 5;
+            this.guna2DataGridView1.Size = new System.Drawing.Size(420, 452);
+            this.guna2DataGridView1.TabIndex = 6;
             this.guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.Font = null;
             this.guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
@@ -127,12 +129,12 @@
             // dgvNo
             // 
             this.dgvNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.dgvNo.FillWeight = 70F;
+            this.dgvNo.FillWeight = 40F;
             this.dgvNo.HeaderText = "#";
-            this.dgvNo.MinimumWidth = 70;
+            this.dgvNo.MinimumWidth = 40;
             this.dgvNo.Name = "dgvNo";
             this.dgvNo.ReadOnly = true;
-            this.dgvNo.Width = 70;
+            this.dgvNo.Width = 40;
             // 
             // dgvID
             // 
@@ -142,13 +144,6 @@
             this.dgvID.ReadOnly = true;
             this.dgvID.Visible = false;
             // 
-            // dgvcategory
-            // 
-            this.dgvcategory.HeaderText = "Date";
-            this.dgvcategory.MinimumWidth = 6;
-            this.dgvcategory.Name = "dgvcategory";
-            this.dgvcategory.ReadOnly = true;
-            // 
             // dgvbName
             // 
             this.dgvbName.FillWeight = 85.89744F;
@@ -157,51 +152,66 @@
             this.dgvbName.Name = "dgvbName";
             this.dgvbName.ReadOnly = true;
             // 
-            // dgvsite
+            // dgvQty
             // 
-            this.dgvsite.HeaderText = "Site";
-            this.dgvsite.MinimumWidth = 6;
-            this.dgvsite.Name = "dgvsite";
-            this.dgvsite.ReadOnly = true;
+            this.dgvQty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.dgvQty.FillWeight = 70F;
+            this.dgvQty.HeaderText = "QTY";
+            this.dgvQty.MinimumWidth = 70;
+            this.dgvQty.Name = "dgvQty";
+            this.dgvQty.ReadOnly = true;
+            this.dgvQty.Width = 70;
             // 
-            // dgvbDel
+            // pictureBox2
             // 
-            this.dgvbDel.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.dgvbDel.FillWeight = 50F;
-            this.dgvbDel.HeaderText = "";
-            this.dgvbDel.Image = global::ConstructionMaterialManagementSystem.Properties.Resources.icons8_delete_50;
-            this.dgvbDel.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.dgvbDel.MinimumWidth = 50;
-            this.dgvbDel.Name = "dgvbDel";
-            this.dgvbDel.ReadOnly = true;
-            this.dgvbDel.Width = 50;
+            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox2.Image = global::ConstructionMaterialManagementSystem.Properties.Resources.icons8_back_100;
+            this.pictureBox2.Location = new System.Drawing.Point(370, 0);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 7;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
-            // frmMyOrders
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::ConstructionMaterialManagementSystem.Properties.Resources.icons8_truck_100;
+            this.pictureBox1.Location = new System.Drawing.Point(13, 14);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(90, 90);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
+            // 
+            // frmToShip
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(986, 597);
+            this.ClientSize = new System.Drawing.Size(420, 578);
             this.Controls.Add(this.guna2DataGridView1);
-            this.Name = "frmMyOrders";
-            this.Text = "frmMyOrders";
+            this.Name = "frmToShip";
+            this.Text = "frmToShip";
             this.Controls.SetChildIndex(this.panel1, 0);
             this.Controls.SetChildIndex(this.panel3, 0);
             this.Controls.SetChildIndex(this.guna2DataGridView1, 0);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2DataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
         private Guna.UI2.WinForms.Guna2DataGridView guna2DataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvcategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvbName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvsite;
-        private System.Windows.Forms.DataGridViewImageColumn dgvbDel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvQty;
     }
 }

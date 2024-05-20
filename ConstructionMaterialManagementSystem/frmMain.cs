@@ -19,6 +19,9 @@ namespace ConstructionMaterialManagementSystem
         public frmDashboard()
         {
             InitializeComponent();
+            btnDashboard.BorderColor = Color.FromArgb(37, 189, 176);
+            btnDashboard.FillColor = Color.FromArgb(37, 189, 176);
+            Addcontrols(new frmHome());
         }
 
         //Add controls to the mainform
@@ -66,6 +69,7 @@ namespace ConstructionMaterialManagementSystem
             _obj = this;
             lblUser.Text = MainClass.USER;
             lblStatus.Text = MainClass.STATUS;
+
 
             foreach (Control c in buttonPanel.Controls)
             {
@@ -150,7 +154,6 @@ namespace ConstructionMaterialManagementSystem
 
         private void btnPOS_Click(object sender, EventArgs e)
         {
-            this.Hide();
             frmPOS pos = new frmPOS();
             pos.ShowDialog();
         }

@@ -122,11 +122,23 @@
     <Compile Include="frmPOS.Designer.cs">
       <DependentUpon>frmPOS.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\frmMyOrderAdd.cs">
+    <Compile Include="Order Process\frmManageOders.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Model\frmMyOrderAdd.Designer.cs">
-      <DependentUpon>frmMyOrderAdd.cs</DependentUpon>
+    <Compile Include="Order Process\frmManageOders.Designer.cs">
+      <DependentUpon>frmManageOders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Order Process\frmToRecieve.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Order Process\frmToRecieve.Designer.cs">
+      <DependentUpon>frmToRecieve.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Order Process\frmToShip.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Order Process\frmToShip.Designer.cs">
+      <DependentUpon>frmToShip.cs</DependentUpon>
     </Compile>
     <Compile Include="ucProduct.cs">
       <SubType>UserControl</SubType>
@@ -134,10 +146,10 @@
     <Compile Include="ucProduct.Designer.cs">
       <DependentUpon>ucProduct.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\frmMyOrders.cs">
+    <Compile Include="Order Process\frmMyOrders.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\frmMyOrders.Designer.cs">
+    <Compile Include="Order Process\frmMyOrders.Designer.cs">
       <DependentUpon>frmMyOrders.cs</DependentUpon>
     </Compile>
     <Compile Include="View\frmUsersView.cs">
@@ -262,13 +274,19 @@
     <EmbeddedResource Include="frmPOS.resx">
       <DependentUpon>frmPOS.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Model\frmMyOrderAdd.resx">
-      <DependentUpon>frmMyOrderAdd.cs</DependentUpon>
+    <EmbeddedResource Include="Order Process\frmManageOders.resx">
+      <DependentUpon>frmManageOders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Order Process\frmToRecieve.resx">
+      <DependentUpon>frmToRecieve.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Order Process\frmToShip.resx">
+      <DependentUpon>frmToShip.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucProduct.resx">
       <DependentUpon>ucProduct.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\frmMyOrders.resx">
+    <EmbeddedResource Include="Order Process\frmMyOrders.resx">
       <DependentUpon>frmMyOrders.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\frmUsersView.resx">
@@ -418,6 +436,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8-construction-100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-truck-100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-order-100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-receive-dollar-100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\436610326_1162817231538848_2053130222212336833_n.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

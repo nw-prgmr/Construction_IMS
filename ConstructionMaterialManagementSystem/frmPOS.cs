@@ -11,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ConstructionMaterialManagementSystem.Model;
+using ConstructionMaterialManagementSystem.Order_Process;
+using ConstructionMaterialManagementSystem.View;
 using Guna.UI2.WinForms;
 using MySql.Data.MySqlClient;
 
@@ -25,7 +27,7 @@ namespace ConstructionMaterialManagementSystem
         MainClass mc = new MainClass();
 
         private PictureBox pic;
-        //private Label price;
+        private string _filter = "";
         private Label name;
 
         public frmPOS()
@@ -92,10 +94,12 @@ namespace ConstructionMaterialManagementSystem
             }
         }
 
+        private Dictionary<string, int> productQuantities = new Dictionary<string, int>(); // Dictionary to store product ID and its quantity
+
         private void GetData()
         {
             con.Open();
-            cmd = new MySqlCommand("SELECT pImage, pName, pID FROM tbl_products ", con);
+            cmd = new MySqlCommand("SELECT p.pImage, p.pName, p.pID, c.cName FROM tbl_products AS p INNER JOIN tbl_category AS c ON c.cID =  p.cID WHERE c.cName LIKE '"+ _filter +"%' ORDER BY pName", con);
             dr = cmd.ExecuteReader();
             while (dr.Read())
             {
@@ -116,6 +120,7 @@ namespace ConstructionMaterialManagementSystem
                 name.BackColor = Color.White;
                 name.ForeColor = Color.Black;
                 name.TextAlign = ContentAlignment.MiddleCenter;
+                name.Font = new Font("Sogui UI",8, FontStyle.Regular);
                 name.Dock = DockStyle.Bottom;
                 name.Tag = dr["pID"].ToString();
 
@@ -134,17 +139,39 @@ namespace ConstructionMaterialManagementSystem
 
         public void OnClick(object sender, EventArgs e)
         {
-            string tag = ((PictureBox)sender).Tag.ToString();
-            con.Open();
-            cmd = new MySqlCommand("SELECT * FROM tbl_products WHERE pID LIKE '"+ tag +"' ",con);
-            dr = cmd.ExecuteReader();
-            dr.Read();
-            if (dr.HasRows)
+            string clickedProductId = ((PictureBox)sender).Tag.ToString();
+
+            // Check if product already exists in DataGridView
+            if (productQuantities.ContainsKey(clickedProductId))
             {
-                guna2DataGridView1.Rows.Add(guna2DataGridView1.Rows.Count + 1, dr["pID"].ToString(), dr["pName"].ToString(), dr["pDescription"].ToString());
+                // Update quantity for existing product
+                productQuantities[clickedProductId]++;
             }
-            dr.Close();
-            con.Close();
+            else
+            {
+                // Add new product with quantity 1
+                productQuantities.Add(clickedProductId, 1);
+
+                // Assuming you have separate columns for product ID, name, and quantity in DataGridView
+                con.Open();
+                cmd = new MySqlCommand("SELECT * FROM tbl_products WHERE pID LIKE '" + clickedProductId + "' ", con);
+                dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    guna2DataGridView1.Rows.Add(guna2DataGridView1.Rows.Count + 1, dr["pID"].ToString(), dr["pName"].ToString(), dr["pDescription"].ToString(), productQuantities[clickedProductId]); // Add with initial quantity 1
+                }
+                dr.Close();
+                con.Close();
+            }
+
+            foreach (DataGridViewRow row in guna2DataGridView1.Rows)
+            {
+                string rowProductId = row.Cells["dgvID"].Value.ToString();  // Assuming "pID" is the product ID column name
+                if (productQuantities.ContainsKey(rowProductId))
+                {
+                    row.Cells["dgvQty"].Value = productQuantities[rowProductId];
+                }
+            }
         }
 
         private void AddCategory()
@@ -163,24 +190,37 @@ namespace ConstructionMaterialManagementSystem
                 {
                     Guna.UI2.WinForms.Guna2Button b = new Guna.UI2.WinForms.Guna2Button();
                     b.FillColor = Color.FromArgb(50, 55, 89);
-                    b.Size = new Size(229, 50);
-                    b.TextAlign = HorizontalAlignment.Left;
+                    b.Size = new Size(201, 40);
+                    b.TextAlign = (HorizontalAlignment)ContentAlignment.MiddleCenter;
+                    b.Font = new Font("Sogui UI", 9, FontStyle.Bold);
                     b.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
                     b.Text = row["cName"].ToString();
 
+                    b.Click += new EventHandler(filter_Click);
                     categoryPanel.Controls.Add(b);
                 }
                 
             }
         }
 
-       
+        private void filter_Click(object sender, EventArgs e)
+        {
+            _filter = ((Guna2Button)sender).Text; // Cast sender to Guna2Button and access Text property
+            productPanel.Controls.Clear();
+            GetData();
+        }
+
 
         private void btnMyOrders_Click(object sender, EventArgs e)
         {
             Guna2Button clickedButton = (Guna2Button)sender; // Get the clicked button
             lastClickedButton = clickedButton; // Update the tracked button
             btnSettings(btnMyOrders, null);
+            frmMyOrders frmMy = new frmMyOrders();
+            frmMy.btnClose.Visible = false;
+            frmMy.btnSave.Visible = false;
+            frmMy.btnUpdate.Visible = false;
+            MainClass.BlurBackground(frmMy);
         }
 
         private void btnToShip_Click(object sender, EventArgs e)
@@ -188,6 +228,11 @@ namespace ConstructionMaterialManagementSystem
             Guna2Button clickedButton = (Guna2Button)sender; // Get the clicked button
             lastClickedButton = clickedButton; // Update the tracked button
             btnSettings(btnToShip, null);
+            frmToShip frmto = new frmToShip();
+            frmto.btnClose.Visible = false;
+            frmto.btnSave.Visible = false;
+            frmto.btnUpdate.Visible = false;
+            MainClass.BlurBackground(frmto);
         }
 
         private void btnToRecieve_Click(object sender, EventArgs e)
@@ -195,6 +240,11 @@ namespace ConstructionMaterialManagementSystem
             Guna2Button clickedButton = (Guna2Button)sender; // Get the clicked button
             lastClickedButton = clickedButton; // Update the tracked button
             btnSettings(btnToRecieve, null);
+            frmToRecieve frmto = new frmToRecieve();
+            frmto.btnClose.Visible = false;
+            frmto.btnSave.Visible = false;
+            frmto.btnUpdate.Visible = false;
+            MainClass.BlurBackground(frmto);
         }
 
         private void btnBackOrder_Click(object sender, EventArgs e)
@@ -205,12 +255,28 @@ namespace ConstructionMaterialManagementSystem
         }
 
 
-
-
         private void guna2DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-           
-           
+            if (e.ColumnIndex >= 0 && e.RowIndex >= 0) // Check for valid click
+            {
+                if (guna2DataGridView1.Columns[e.ColumnIndex].Name == "dgvdel")
+                {
+                    DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this item?", "Confirmation", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        string productId = guna2DataGridView1.Rows[e.RowIndex].Cells["dgvID"].Value.ToString(); // Assuming "dgvID" is the product ID column
+
+                        // Remove product from dictionary (if applicable)
+                        if (productQuantities.ContainsKey(productId))
+                        {
+                            productQuantities.Remove(productId);
+                        }
+
+                        // Remove row from DataGridView
+                        guna2DataGridView1.Rows.RemoveAt(e.RowIndex);
+                    }
+                }
+            }
         }
 
         private void guna2DataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -220,8 +286,44 @@ namespace ConstructionMaterialManagementSystem
 
         private void btnRequest_Click(object sender, EventArgs e)
         {
-           // frmMyOrderAdd orderAdd = new frmMyOrderAdd();
-            //MainClass.BlurBackground(orderAdd);
+            try
+            {
+                int inserted = 0;
+
+                foreach (DataGridViewRow row in guna2DataGridView1.Rows)
+                {
+                    con.Open();
+                    cmd = new MySqlCommand("INSERT INTO tbl_myorder (moDate, mopName, moQty, moSite) VALUES (@moDate, @mopName, @moQty, @moSite)", con);
+                    cmd.Parameters.AddWithValue("@moDate", dtpMO.Value);
+                    cmd.Parameters.AddWithValue("@mopName", row.Cells["dgvcName"].Value);
+                    cmd.Parameters.AddWithValue("@moSite", txtSiteLoc.Text);
+                    cmd.Parameters.AddWithValue("@moQty", Convert.ToInt32(row.Cells["dgvQty"].Value));
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    inserted++;
+                }
+                
+                if (inserted > 0)
+                {
+                    MessageBox.Show(string.Format("{0} Order Requested", inserted), "Message");
+                }
+               
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                MessageBox.Show("Warning: " + ex.Message, "Warning");
+            }
+        }
+
+        private void guna2DateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

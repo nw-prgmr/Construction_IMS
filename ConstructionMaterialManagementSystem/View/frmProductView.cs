@@ -47,7 +47,7 @@ namespace ConstructionMaterialManagementSystem.View
                 int i = 0;
                 dgvProduct.Rows.Clear();
                 con.Open();
-                cmd = new MySqlCommand("SELECT p.pID, p.pName, c.cName, b.bName, s.sName, p.pDescription, p.pCost, p.pStock " +
+                cmd = new MySqlCommand("SELECT p.pID, p.pName, c.cName, b.bName, s.sName, p.pDescription, p.pCost, p.pStock, p.pImage " +
                                        "FROM tbl_products AS p " +
                                        "INNER JOIN tbl_category AS c ON c.cID = p.cID " +
                                        "INNER JOIN tbl_brand AS b ON b.bId = p.bID " +
@@ -56,7 +56,7 @@ namespace ConstructionMaterialManagementSystem.View
                 while (dr.Read())
                 {
                     i += 1;
-                    dgvProduct.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), dr[6].ToString(), dr[7].ToString());
+                    dgvProduct.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), dr[6].ToString(), dr[7].ToString(), dr[8].ToString());
                 }
                 dr.Close();
                 con.Close();
@@ -103,6 +103,7 @@ namespace ConstructionMaterialManagementSystem.View
                 frm.cboBrand.Text = dgvProduct.Rows[e.RowIndex].Cells[4].Value.ToString();
                 frm.cboCategory.Text = dgvProduct.Rows[e.RowIndex].Cells[3].Value.ToString();
                 frm.cboSupplier.Text = dgvProduct.Rows[e.RowIndex].Cells[5].Value.ToString();
+                //frm.ProductPicture.Image = dgvProduct.Rows[e.RowIndex].Cells[9].Value.ToString();
                 MainClass.BlurBackground(frm);
             }
             else if (colName == "dgvdel")

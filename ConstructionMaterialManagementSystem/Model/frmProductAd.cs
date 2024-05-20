@@ -100,7 +100,7 @@ namespace ConstructionMaterialManagementSystem.Model
                 try
                 {
                     MemoryStream ms = new MemoryStream();
-                    guna2PictureBox1.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    ProductPicture.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
                     byte[] arrImage = ms.GetBuffer();
 
                     con.Open();
@@ -145,7 +145,10 @@ namespace ConstructionMaterialManagementSystem.Model
 
                     
 
-                    gmdSampleAdd.Show("Save Successfully.", "Product Added");
+                    if(gmdSampleAdd.Show("Save Successfully.", "Product Added") == DialogResult.OK )
+                    {
+                        this.Close();
+                    }
                     Clear();
                     frmproview.LoadRecords();
                     con.Close();
@@ -179,7 +182,7 @@ namespace ConstructionMaterialManagementSystem.Model
                 try
                 {
                     MemoryStream ms = new MemoryStream();
-                    guna2PictureBox1.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    ProductPicture.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
                     byte[] arrImage = ms.GetBuffer();
 
                     con.Open();
@@ -224,7 +227,10 @@ namespace ConstructionMaterialManagementSystem.Model
 
 
 
-                    gmdSampleAdd.Show("Successfully Updated.", "Product Update");
+                    if(gmdSampleAdd.Show("Successfully Updated.", "Product Update") == DialogResult.OK)
+                    {
+                        this.Close();
+                    }
                     Clear();
                     frmproview.LoadRecords();
                     con.Close();
@@ -246,7 +252,7 @@ namespace ConstructionMaterialManagementSystem.Model
         {
             openFileDialog1.Filter = "Image files (*.png) |*.png| (*.jpg) |*.jpg| (*.gif) |*.gif";
             openFileDialog1.ShowDialog();
-            guna2PictureBox1.Image = Image.FromFile(openFileDialog1.FileName);
+            ProductPicture.Image = Image.FromFile(openFileDialog1.FileName);
         }
     }
 }

@@ -52,8 +52,8 @@ namespace ConstructionMaterialManagementSystem
                         USER = dt.Rows[0]["uName"].ToString();
                         STATUS = dt.Rows[0]["uStatus"].ToString();
 
-                        byte[] imageArray = (byte[])dt.Rows[0]["uImage"];
-                        IMG = Image.FromStream(new MemoryStream(imageArray));
+                       // byte[] imageArray = (byte[])dt.Rows[0]["uImage"];
+                       // IMG = Image.FromStream(new MemoryStream(imageArray));
                     }
                 }
             }

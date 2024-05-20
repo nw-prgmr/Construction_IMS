@@ -63,6 +63,16 @@ namespace ConstructionMaterialManagementSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _436610326_1162817231538848_2053130222212336833_n {
+            get {
+                object obj = ResourceManager.GetObject("436610326_1162817231538848_2053130222212336833_n", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Admin_Settings_Male {
             get {
                 object obj = ResourceManager.GetObject("Admin Settings Male", resourceCulture);
@@ -253,9 +263,29 @@ namespace ConstructionMaterialManagementSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_order_100 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-order-100", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_pos_50 {
             get {
                 object obj = ResourceManager.GetObject("icons8-pos-50", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_receive_dollar_100 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-receive-dollar-100", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -286,6 +316,16 @@ namespace ConstructionMaterialManagementSystem.Properties {
         internal static System.Drawing.Bitmap icons8_supplier_50 {
             get {
                 object obj = ResourceManager.GetObject("icons8-supplier-50", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_truck_100 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-truck-100", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
