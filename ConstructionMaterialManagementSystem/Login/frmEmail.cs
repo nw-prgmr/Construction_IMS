@@ -9,27 +9,18 @@ using System.Threading.Tasks;
 using System.Data.SqlClient; // For SQL Server//using MySql.Data.MySqlClient; // For MySQL
 using System.Security.Cryptography;
 using System.Windows.Forms;
-using System.Net;
-using System.Net.Mail;
-using ConstructionMaterialManagementSystem.Change_Password;
 
 namespace ConstructionMaterialManagementSystem
 {
     public partial class frmEmail : Form
     {
         // Connection string for MySQL 
-        //private string connectionString = "Server=localhost;Database=constructionmaterialms;Integrated Security=True;";
-
-        string randomCode;
-        public static string to;
+        private string connectionString = "Server=localhost;Database=constructionmaterialms;Integrated Security=True;";
 
         public frmEmail()
         {
             InitializeComponent();
         }
-
-
-
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
@@ -61,7 +52,6 @@ namespace ConstructionMaterialManagementSystem
             }
         }
 
-        /*
         // Method to insert user data into the database
         private void InsertUserIntoDatabase(string username, string password)
         {
@@ -88,56 +78,52 @@ namespace ConstructionMaterialManagementSystem
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
-        }  */
-
-        private void btnSend_Click(object sender, EventArgs e)
-        {
-            string from, pass, messageBody;
-            Random rand = new Random();
-            randomCode = (rand.Next(999999)).ToString();
-            MailMessage message = new MailMessage();
-            to = (txtEmail.Text).ToString();
-            from = "junie.antopina07@gmail.com";
-            pass = "yayamanakoAtmakakatulongsaiba";
-            messageBody = "your reset code is " + randomCode;
-            message.To.Add(to);
-            message.From = new MailAddress(from);
-            message.Body = messageBody;
-            message.Subject = "password reseting code";
-            SmtpClient smtp = new SmtpClient("smtp.gmail.com");
-            smtp.EnableSsl = true;
-            smtp.Port = 587;
-            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-            smtp.Credentials = new NetworkCredential(from, pass);
-            try
-            {
-                smtp.Send(message);
-                MessageBox.Show("code send successfully" + randomCode);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
 
-        private void btnSubmit_Click(object sender, EventArgs e)
+
+        //Button transition
+        private void btnSend_MouseDown(object sender, MouseEventArgs e)
         {
-            if (randomCode == (txtVerCode.Text).ToString())
-            {
-                to = txtEmail.Text;
-                frmForgetPass frmForgetPass = new frmForgetPass();
-                this.Hide();
-                frmForgetPass.Show();
-            }
-            else
-            {
-                MessageBox.Show("wrong code");
-            }
+            btnSend.FillColor = Color.FromArgb(237, 191, 67);
+            btnSend.ForeColor = Color.FromArgb(23, 32, 42);
         }
 
-        private void btnSend_Click_1(object sender, EventArgs e)
+        private void btnSend_MouseUp(object sender, MouseEventArgs e)
         {
+            btnSend.FillColor = Color.Transparent;
+            btnSend.ForeColor = Color.WhiteSmoke;
+            btnSend.BorderColor = Color.FromArgb(237, 191, 67);
+        }
 
+        private void btnSubmit_MouseDown(object sender, MouseEventArgs e)
+        {
+            btnSubmit.FillColor = Color.FromArgb(237, 191, 67);
+            btnSubmit.ForeColor = Color.FromArgb(23, 32, 42);
+        }
+
+        private void btnSubmit_MouseUp(object sender, MouseEventArgs e)
+        {
+            btnSubmit.FillColor = Color.Transparent;
+            btnSubmit.ForeColor = Color.WhiteSmoke;
+            btnSubmit.BorderColor = Color.FromArgb(237, 191, 67);
+        }
+
+        private void btnClose_MouseDown(object sender, MouseEventArgs e)
+        {
+            btnClose.FillColor = Color.FromArgb(237, 191, 67);
+            btnClose.ForeColor = Color.FromArgb(23, 32, 42);
+        }
+
+        private void btnClose_MouseUp(object sender, MouseEventArgs e)
+        {
+            btnClose.FillColor = Color.Transparent;
+            btnClose.ForeColor = Color.WhiteSmoke;
+            btnClose.BorderColor = Color.FromArgb(237, 191, 67);
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 
