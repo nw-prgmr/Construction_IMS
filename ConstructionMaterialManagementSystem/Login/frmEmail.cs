@@ -9,14 +9,23 @@ using System.Threading.Tasks;
 using System.Data.SqlClient; // For SQL Server//using MySql.Data.MySqlClient; // For MySQL
 using System.Security.Cryptography;
 using System.Windows.Forms;
+using MySqlX.XDevAPI;
+using Mysqlx;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using System.Runtime.InteropServices;
+using System.Net.Mail;
+using System.Net;
+using ConstructionMaterialManagementSystem.Change_Password;
 
 namespace ConstructionMaterialManagementSystem
 {
     public partial class frmEmail : Form
     {
         // Connection string for MySQL 
-        private string connectionString = "Server=localhost;Database=constructionmaterialms;Integrated Security=True;";
+        //private string connectionString = "Server=localhost;Database=constructionmaterialms;Integrated Security=True;";
 
+        string randomCode;
+        public static string to;
         public frmEmail()
         {
             InitializeComponent();
@@ -24,14 +33,14 @@ namespace ConstructionMaterialManagementSystem
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-           // string username = txtUname.Text;
-           // string password = txtUpassword.Text;
+            // string username = txtUname.Text;
+            // string password = txtUpassword.Text;
 
             // Hash the password using SHA-256
-           // string hashedPassword = HashPassword(password);
+            // string hashedPassword = HashPassword(password);
 
             // Insert user data into the database
-           // InsertUserIntoDatabase(username, hashedPassword);
+            // InsertUserIntoDatabase(username, hashedPassword);
         }
 
         // Method to hash a password using SHA-256
@@ -52,6 +61,8 @@ namespace ConstructionMaterialManagementSystem
             }
         }
 
+
+        /*
         // Method to insert user data into the database
         private void InsertUserIntoDatabase(string username, string password)
         {
@@ -77,55 +88,55 @@ namespace ConstructionMaterialManagementSystem
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
-            }
-        }
+            } 
+        }    */
 
 
         //Button transition
-        private void btnSend_MouseDown(object sender, MouseEventArgs e)
+
+
+
+        private void btnSend_Click(object sender, EventArgs e)
         {
-            btnSend.FillColor = Color.FromArgb(237, 191, 67);
-            btnSend.ForeColor = Color.FromArgb(23, 32, 42);
+            string from = "junie.antopina07@gmail.com";
+            string pass = "yayamanakoAtmakakatulongsaiba"; // **Not recommended in production**
+            string messageBody;
+
+            // Generate random code
+            Random rand = new Random();
+            int randomCode = rand.Next(100000, 999999); // Ensure 6-digit code
+
+            MailMessage message = new MailMessage();
+            string to = txtEmail.Text;
+
+            message.To.Add(to);
+            message.From = new MailAddress(from);
+            messageBody = "Your password reset code is: " + randomCode;
+            message.Body = messageBody;
+            message.Subject = "Password Reset Code";
+
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com");
+            smtp.EnableSsl = true;
+            smtp.Port = 587;
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtp.Credentials = new NetworkCredential(from, pass);
+
+            try
+            {
+                smtp.Send(message);
+                MessageBox.Show("A password reset code has been sent to your email address.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred while sending the email. Please try again later.");
+                // Consider logging the actual exception for debugging purposes
+            }
         }
 
-        private void btnSend_MouseUp(object sender, MouseEventArgs e)
+        private void btnClose_Click_1(object sender, EventArgs e)
         {
-            btnSend.FillColor = Color.Transparent;
-            btnSend.ForeColor = Color.WhiteSmoke;
-            btnSend.BorderColor = Color.FromArgb(237, 191, 67);
-        }
 
-        private void btnSubmit_MouseDown(object sender, MouseEventArgs e)
-        {
-            btnSubmit.FillColor = Color.FromArgb(237, 191, 67);
-            btnSubmit.ForeColor = Color.FromArgb(23, 32, 42);
-        }
-
-        private void btnSubmit_MouseUp(object sender, MouseEventArgs e)
-        {
-            btnSubmit.FillColor = Color.Transparent;
-            btnSubmit.ForeColor = Color.WhiteSmoke;
-            btnSubmit.BorderColor = Color.FromArgb(237, 191, 67);
-        }
-
-        private void btnClose_MouseDown(object sender, MouseEventArgs e)
-        {
-            btnClose.FillColor = Color.FromArgb(237, 191, 67);
-            btnClose.ForeColor = Color.FromArgb(23, 32, 42);
-        }
-
-        private void btnClose_MouseUp(object sender, MouseEventArgs e)
-        {
-            btnClose.FillColor = Color.Transparent;
-            btnClose.ForeColor = Color.WhiteSmoke;
-            btnClose.BorderColor = Color.FromArgb(237, 191, 67);
-        }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
     }
-
 }
 

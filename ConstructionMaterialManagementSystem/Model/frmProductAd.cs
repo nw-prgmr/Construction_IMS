@@ -254,6 +254,11 @@ namespace ConstructionMaterialManagementSystem.Model
             openFileDialog1.ShowDialog();
             ProductPicture.Image = Image.FromFile(openFileDialog1.FileName);
         }
+
+        private void cboSupplier_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -103,7 +104,8 @@ namespace ConstructionMaterialManagementSystem.View
                 frm.cboBrand.Text = dgvProduct.Rows[e.RowIndex].Cells[4].Value.ToString();
                 frm.cboCategory.Text = dgvProduct.Rows[e.RowIndex].Cells[3].Value.ToString();
                 frm.cboSupplier.Text = dgvProduct.Rows[e.RowIndex].Cells[5].Value.ToString();
-                //frm.ProductPicture.Image = dgvProduct.Rows[e.RowIndex].Cells[9].Value.ToString();
+                
+
                 MainClass.BlurBackground(frm);
             }
             else if (colName == "dgvdel")
