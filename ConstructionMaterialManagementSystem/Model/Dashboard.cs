@@ -7,19 +7,21 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace ConstructionMaterialManagementSystem
-{ 
+namespace ConstructionMaterialManagementSystem.Models
+{
 
-        public struct MaterialStock
-        { 
-            public string MaterialName { get; set; }
-            public int Stock { get; set; }
-        }
+    public struct MaterialStock
+    {
+        public string MaterialName { get; set; }
+        public int Stock { get; set; }
+    }
 
 
     public class Dashboard : MainClass
     {
         //Fields & Properties
+        private DateTime startDate;
+        private DateTime endDate;
         public int NumSuppliers { get; private set; }
         public int NumMaterials { get; private set; }
         public List<KeyValuePair<string, int>> TopMaterialsList { get; private set; }
@@ -35,7 +37,7 @@ namespace ConstructionMaterialManagementSystem
         //Private methods
         private void GetNumberItems()
         {
-            using (var connection = con)
+            using (MySqlConnection connection = con)
             {
                 connection.Open();
                 using (var command = new MySqlCommand())
@@ -43,11 +45,11 @@ namespace ConstructionMaterialManagementSystem
                     command.Connection = connection;
                     //Get Total Number of Suppliers
                     command.CommandText = "select count(sID) from tbl_supplier";
-                    NumSuppliers = (int)command.ExecuteScalar();
+                    NumSuppliers = Convert.ToInt32(command.ExecuteNonQuery());
 
                     //Get Total Number of Materials
                     command.CommandText = "select count(pId) from tbl_products";
-                    NumMaterials = (int)command.ExecuteScalar();
+                    NumMaterials = (int)command.ExecuteNonQuery();
                 }
             }
         }

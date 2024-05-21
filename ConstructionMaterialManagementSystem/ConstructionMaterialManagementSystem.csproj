@@ -125,7 +125,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CodeRepos.cs" />
-    <Compile Include="Dashboard.cs" />
     <Compile Include="frmMainUser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -138,6 +137,7 @@
     <Compile Include="frmPOS.Designer.cs">
       <DependentUpon>frmPOS.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\Dashboard.cs" />
     <Compile Include="Order Process\frmManageOders.cs">
       <SubType>Form</SubType>
     </Compile>
