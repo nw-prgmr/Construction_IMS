@@ -47,13 +47,15 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(52)))), ((int)(((byte)(64)))));
+            this.panel2.Controls.Add(this.buttonPanel);
             this.panel2.Controls.Add(this.lblStatus);
             this.panel2.Controls.Add(this.lblUser);
             this.panel2.Controls.Add(this.guna2CirclePictureBox1);
-            this.panel2.Location = new System.Drawing.Point(26, 20);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(217, 217);
+            this.panel2.Size = new System.Drawing.Size(267, 866);
             this.panel2.TabIndex = 8;
             // 
             // lblStatus
@@ -65,7 +67,7 @@
             this.lblStatus.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.lblStatus.Location = new System.Drawing.Point(0, 173);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(217, 41);
+            this.lblStatus.Size = new System.Drawing.Size(267, 41);
             this.lblStatus.TabIndex = 7;
             this.lblStatus.Text = "Status";
             this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -78,7 +80,7 @@
             this.lblUser.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.lblUser.Location = new System.Drawing.Point(0, 154);
             this.lblUser.Name = "lblUser";
-            this.lblUser.Size = new System.Drawing.Size(217, 23);
+            this.lblUser.Size = new System.Drawing.Size(267, 23);
             this.lblUser.TabIndex = 7;
             this.lblUser.Text = "Username";
             this.lblUser.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -87,7 +89,7 @@
             // 
             this.guna2CirclePictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.guna2CirclePictureBox1.ImageRotate = 0F;
-            this.guna2CirclePictureBox1.Location = new System.Drawing.Point(50, 21);
+            this.guna2CirclePictureBox1.Location = new System.Drawing.Point(73, 21);
             this.guna2CirclePictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
             this.guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
@@ -103,10 +105,10 @@
             this.buttonPanel.Controls.Add(this.btnOrders);
             this.buttonPanel.Controls.Add(this.btnPOS);
             this.buttonPanel.Controls.Add(this.btnHome);
-            this.buttonPanel.Location = new System.Drawing.Point(26, 255);
+            this.buttonPanel.Location = new System.Drawing.Point(12, 278);
             this.buttonPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonPanel.Name = "buttonPanel";
-            this.buttonPanel.Size = new System.Drawing.Size(217, 586);
+            this.buttonPanel.Size = new System.Drawing.Size(242, 586);
             this.buttonPanel.TabIndex = 9;
             // 
             // btnLogout
@@ -209,10 +211,10 @@
             // 
             this.ControlPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ControlPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(43)))), ((int)(((byte)(53)))));
-            this.ControlPanel.Location = new System.Drawing.Point(273, 20);
+            this.ControlPanel.Location = new System.Drawing.Point(287, 0);
             this.ControlPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ControlPanel.Name = "ControlPanel";
-            this.ControlPanel.Size = new System.Drawing.Size(1226, 821);
+            this.ControlPanel.Size = new System.Drawing.Size(1235, 866);
             this.ControlPanel.TabIndex = 11;
             // 
             // frmMainUser
@@ -222,7 +224,6 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(30)))), ((int)(((byte)(36)))));
             this.ClientSize = new System.Drawing.Size(1523, 866);
             this.Controls.Add(this.ControlPanel);
-            this.Controls.Add(this.buttonPanel);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmMainUser";

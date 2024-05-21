@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Management;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -36,11 +37,25 @@ namespace ConstructionMaterialManagementSystem
             con = new MySqlConnection(mc.dbconnect());
         }
 
+        public void LoadUser()
+        {
+            cboUser.Items.Clear();
+            con.Open();
+            cmd = new MySqlCommand("SELECT uName FROM tbl_users", con);
+            dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                cboUser.Items.Add(dr[0].ToString());
+            }
+            dr.Close();
+            con.Close();
+        }
+
         private void frmPOS_Load(object sender, EventArgs e)
         {
             guna2DataGridView1.BorderStyle = BorderStyle.FixedSingle;
             AddCategory();
-
+            LoadUser();
             GetData();
 
             foreach (Control c in TopPanel.Controls)
@@ -162,6 +177,8 @@ namespace ConstructionMaterialManagementSystem
                 }
                 dr.Close();
                 con.Close();
+
+               
             }
 
             foreach (DataGridViewRow row in guna2DataGridView1.Rows)
@@ -284,36 +301,68 @@ namespace ConstructionMaterialManagementSystem
             
         }
 
+        
         private void btnRequest_Click(object sender, EventArgs e)
         {
-            try
-            {
-                int inserted = 0;
+            DataTable dt = new DataTable();
 
-                foreach (DataGridViewRow row in guna2DataGridView1.Rows)
-                {
-                    con.Open();
-                    cmd = new MySqlCommand("INSERT INTO tbl_myorder (moDate, mopName, moQty, moSite) VALUES (@moDate, @mopName, @moQty, @moSite)", con);
-                    cmd.Parameters.AddWithValue("@moDate", dtpMO.Value);
-                    cmd.Parameters.AddWithValue("@mopName", row.Cells["dgvcName"].Value);
-                    cmd.Parameters.AddWithValue("@moSite", txtSiteLoc.Text);
-                    cmd.Parameters.AddWithValue("@moQty", Convert.ToInt32(row.Cells["dgvQty"].Value));
-                    cmd.ExecuteNonQuery();
-                    con.Close();
-                    inserted++;
-                }
-                
-                if (inserted > 0)
-                {
-                    MessageBox.Show(string.Format("{0} Order Requested", inserted), "Message");
-                }
-               
-            }
-            catch (Exception ex)
+            if (MainClass.validation(this) == false)
             {
-                con.Close();
-                MessageBox.Show("Warning: " + ex.Message, "Warning");
+                MessageBox.Show("Please remove errors", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+            else
+            {
+                try
+                {
+                    int inserted = 0;
+
+                    string uid = "";
+                    con.Open();
+                    cmd = new MySqlCommand("SELECT uID FROM tbl_users WHERE uName LIKE '" + cboUser.Text + "' ", con);
+                    dr = cmd.ExecuteReader();
+                    dr.Read();
+                    if (dr.HasRows) { uid = dr[0].ToString(); }
+                    dr.Close();
+                    con.Close();
+
+                    foreach (DataGridViewRow row in guna2DataGridView1.Rows)
+                    {
+                        con.Open();
+                        cmd = new MySqlCommand("INSERT INTO tbl_myorder (mouID, moDate, mopName, moQty, moSite, moRef) VALUES (@mouID,@moDate, @mopName, @moQty, @moSite, @moRef)", con);
+                        cmd.Parameters.AddWithValue("@mouID", int.Parse(uid));
+                        cmd.Parameters.AddWithValue("@moDate", dtpMO.Value);
+                        cmd.Parameters.AddWithValue("@mopName", row.Cells["dgvcName"].Value);
+                        cmd.Parameters.AddWithValue("@moSite", txtSiteLoc.Text);
+                        cmd.Parameters.AddWithValue("@moRef", txtOrdRef.Text);
+                        cmd.Parameters.AddWithValue("@moQty", Convert.ToInt32(row.Cells["dgvQty"].Value));
+                        cmd.ExecuteNonQuery();
+                        dr.Close() ;
+                        con.Close();
+                        
+                        inserted++;
+                    }
+
+                    if (inserted > 0)
+                    {
+                        if  (MessageBox.Show(string.Format("{0} Item(s) Requested", inserted), "Message") == DialogResult.OK)
+                        {
+                            txtOrdRef.Clear();
+                            txtSiteLoc.Clear();
+                            cboUser.Items.Clear();
+                            guna2DataGridView1.Rows.Clear();
+                        }
+                        
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                    MessageBox.Show("Warning: " + ex.Message, "Warning");
+                }
+            }
+                
         }
 
         private void guna2DateTimePicker1_ValueChanged(object sender, EventArgs e)
@@ -324,6 +373,16 @@ namespace ConstructionMaterialManagementSystem
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void cboUser_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

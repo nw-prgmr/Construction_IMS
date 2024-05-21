@@ -305,6 +305,7 @@
             this.cboSupplier.Size = new System.Drawing.Size(173, 31);
             this.cboSupplier.TabIndex = 1;
             this.cboSupplier.Tag = "v";
+            this.cboSupplier.SelectedIndexChanged += new System.EventHandler(this.cboSupplier_SelectedIndexChanged);
             // 
             // lblProduct
             // 

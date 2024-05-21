@@ -1,4 +1,5 @@
 ﻿using ConstructionMaterialManagementSystem.Model;
+using ConstructionMaterialManagementSystem.Order_Process;
 using ConstructionMaterialManagementSystem.View;
 using Guna.UI2.WinForms;
 using System;
@@ -156,6 +157,16 @@ namespace ConstructionMaterialManagementSystem
         {
             frmPOS pos = new frmPOS();
             pos.ShowDialog();
+        }
+
+        private void btnOrders_Click(object sender, EventArgs e)
+        {
+            Guna2Button clickedButton = (Guna2Button)sender; // Get the clicked button
+            lastClickedButton = clickedButton; // Update the tracked button
+            btnSettings(btnOrders, null);
+            frmManageOders frmManage = new frmManageOders();
+            frmManage.LoadOrderDetails();
+            Addcontrols(frmManage);
         }
     }
 }
