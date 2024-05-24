@@ -48,16 +48,16 @@ namespace ConstructionMaterialManagementSystem.View
                 int i = 0;
                 dgvProduct.Rows.Clear();
                 con.Open();
-                cmd = new MySqlCommand("SELECT p.pID, p.pName, c.cName, b.bName, s.sName, p.pDescription, p.pCost, p.pStock, p.pImage " +
+                cmd = new MySqlCommand("SELECT p.pID, p.pName, c.cName, b.bName, s.sName, p.pDescription, p.pStock, p.pImage " +
                                        "FROM tbl_products AS p " +
                                        "INNER JOIN tbl_category AS c ON c.cID = p.cID " +
                                        "INNER JOIN tbl_brand AS b ON b.bId = p.bID " +
-                                       "INNER JOIN tbl_supplier AS s ON s.sID = p.sID ", con);
+                                       "INNER JOIN tbl_supplier AS s ON s.sID = p.sID WHERE pName LIKE '%"+ guna2TextBox1.Text + "%' ORDER BY pName ASC", con);
                 dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
                     i += 1;
-                    dgvProduct.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), dr[6].ToString(), dr[7].ToString(), dr[8].ToString());
+                    dgvProduct.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5].ToString(), dr[6].ToString(), dr[7].ToString());
                 }
                 dr.Close();
                 con.Close();
@@ -99,8 +99,7 @@ namespace ConstructionMaterialManagementSystem.View
                 frm.lblProduct.Text = dgvProduct.Rows[e.RowIndex].Cells[1].Value.ToString();
                 frm.txtProName.Text = dgvProduct.Rows[e.RowIndex].Cells[2].Value.ToString();
                 frm.txtProDesc.Text = dgvProduct.Rows[e.RowIndex].Cells[6].Value.ToString();
-                frm.txtProCost.Text = dgvProduct.Rows[e.RowIndex].Cells[7].Value.ToString();
-                frm.txtProStock.Text = dgvProduct.Rows[e.RowIndex].Cells[8].Value.ToString();
+                frm.txtProStock.Text = dgvProduct.Rows[e.RowIndex].Cells[7].Value.ToString();
                 frm.cboBrand.Text = dgvProduct.Rows[e.RowIndex].Cells[4].Value.ToString();
                 frm.cboCategory.Text = dgvProduct.Rows[e.RowIndex].Cells[3].Value.ToString();
                 frm.cboSupplier.Text = dgvProduct.Rows[e.RowIndex].Cells[5].Value.ToString();
@@ -138,6 +137,11 @@ namespace ConstructionMaterialManagementSystem.View
         }
 
         private void guna2TextBox1_TextChanged(object sender, EventArgs e)
+        {
+            LoadRecords();
+        }
+
+        private void guna2TextBox1_TextChanged_1(object sender, EventArgs e)
         {
             LoadRecords();
         }

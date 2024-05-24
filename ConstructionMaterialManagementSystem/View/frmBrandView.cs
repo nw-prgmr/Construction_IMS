@@ -35,7 +35,7 @@ namespace ConstructionMaterialManagementSystem.View
             guna2DataGridView1.Rows.Clear();
             cmd = new MySqlCommand("SELECT b.bID, b.bName, c.cName " +
                                    "FROM tbl_brand AS b " +
-                                   "INNER JOIN tbl_category AS c ON c.cID = b.cID", con);
+                                   "INNER JOIN tbl_category AS c ON c.cID = b.cID WHERE bName LIKE '%"+ guna2TextBox1.Text + "%'", con);
             con.Open();
             dr = cmd.ExecuteReader();
             while (dr.Read())
@@ -94,6 +94,11 @@ namespace ConstructionMaterialManagementSystem.View
         private void guna2Button1_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void guna2TextBox1_TextChanged(object sender, EventArgs e)
+        {
+            LoadRecords();
         }
     }
 }

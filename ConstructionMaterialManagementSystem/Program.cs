@@ -1,4 +1,5 @@
 ﻿
+using ConstructionMaterialManagementSystem.Order_Process;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace ConstructionMaterialManagementSystem
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmLogin());
+            Application.Run(new frmDashboard());
         }
     }
 }

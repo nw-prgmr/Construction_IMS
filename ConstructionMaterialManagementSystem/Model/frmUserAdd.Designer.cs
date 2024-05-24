@@ -40,6 +40,7 @@
             this.txtuPic = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.Status = new System.Windows.Forms.Label();
             this.txtStatus = new Guna.UI2.WinForms.Guna2TextBox();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtuPic)).BeginInit();
             this.SuspendLayout();
@@ -237,9 +238,9 @@
             this.Status.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Status.Location = new System.Drawing.Point(30, 318);
             this.Status.Name = "Status";
-            this.Status.Size = new System.Drawing.Size(49, 20);
+            this.Status.Size = new System.Drawing.Size(61, 20);
             this.Status.TabIndex = 9;
-            this.Status.Text = "Status";
+            this.Status.Text = "Position";
             // 
             // txtStatus
             // 
@@ -264,6 +265,10 @@
             this.txtStatus.Size = new System.Drawing.Size(160, 33);
             this.txtStatus.TabIndex = 4;
             this.txtStatus.Tag = "v";
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // frmUserAdd
             // 
@@ -319,5 +324,6 @@
         private Guna.UI2.WinForms.Guna2CirclePictureBox txtuPic;
         private System.Windows.Forms.Label Status;
         public Guna.UI2.WinForms.Guna2TextBox txtStatus;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }

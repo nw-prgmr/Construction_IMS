@@ -44,11 +44,11 @@ namespace ConstructionMaterialManagementSystem.Models
                 {
                     command.Connection = connection;
                     //Get Total Number of Suppliers
-                    command.CommandText = "select count(sID) from tbl_supplier";
+                    command.CommandText = "SELECT COUNT(sID) FROM tbl_supplier";
                     NumSuppliers = Convert.ToInt32(command.ExecuteNonQuery());
 
                     //Get Total Number of Materials
-                    command.CommandText = "select count(pId) from tbl_products";
+                    command.CommandText = "SELECT count(pId) FROM tbl_products";
                     NumMaterials = (int)command.ExecuteNonQuery();
                 }
             }

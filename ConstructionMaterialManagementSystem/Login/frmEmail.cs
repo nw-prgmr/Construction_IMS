@@ -128,7 +128,7 @@ namespace ConstructionMaterialManagementSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show("An error occurred while sending the email. Please try again later.");
+                MessageBox.Show("An error occurred while sending the email." + ex.Message + " Please try again later");
                 // Consider logging the actual exception for debugging purposes
             }
         }

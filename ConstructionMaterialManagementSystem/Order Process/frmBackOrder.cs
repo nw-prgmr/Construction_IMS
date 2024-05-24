@@ -9,16 +9,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ConstructionMaterialManagementSystem.View
+namespace ConstructionMaterialManagementSystem.Order_Process
 {
-    public partial class frmMyOrders : SampleAdd
+    public partial class frmBackOrder : SampleAdd
     {
         MySqlConnection con;
         MySqlCommand cmd;
         MySqlDataReader dr;
         MainClass mc = new MainClass();
 
-        public frmMyOrders()
+        public frmBackOrder()
         {
             InitializeComponent();
             con = new MySqlConnection(mc.dbconnect());
@@ -29,13 +29,13 @@ namespace ConstructionMaterialManagementSystem.View
         {
             int i = 0;
             guna2DataGridView1.Rows.Clear();
-            cmd = new MySqlCommand("SELECT `moID`, `Date and Time`, `Material`, `Qty`, `Site`, `Ref`s FROM tbl_myorder", con);
+            cmd = new MySqlCommand("SELECT `boID`, `boName`, `boQty`, `boRef` `boSite` FROM tbl_backorder", con);
             con.Open();
             dr = cmd.ExecuteReader();
             while (dr.Read())
             {
                 i += 1;
-                guna2DataGridView1.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), dr[5].ToString());
+                guna2DataGridView1.Rows.Add(i, dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString());
             }
             dr.Close();
             con.Close();

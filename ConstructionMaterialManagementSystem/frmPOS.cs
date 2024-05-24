@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics.Metrics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -30,11 +31,14 @@ namespace ConstructionMaterialManagementSystem
         private PictureBox pic;
         private string _filter = "";
         private Label name;
+        private Label stock;
+
 
         public frmPOS()
         {
             InitializeComponent();
             con = new MySqlConnection(mc.dbconnect());
+            
         }
 
         public void LoadUser()
@@ -109,45 +113,95 @@ namespace ConstructionMaterialManagementSystem
             }
         }
 
+        private void AddCategory()
+        {
+            string qry = "SELECT * FROM tbl_category";
+            MySqlCommand cmd = new MySqlCommand(qry, MainClass.con);
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            categoryPanel.Controls.Clear();
+
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    Guna.UI2.WinForms.Guna2Button b = new Guna.UI2.WinForms.Guna2Button();
+                    b.FillColor = Color.FromArgb(237, 191, 67);
+                    b.ForeColor = Color.FromArgb(23, 32, 42);
+                    b.BorderRadius = 7;
+                    b.Size = new Size(170, 25);
+                    b.TextAlign = (HorizontalAlignment)ContentAlignment.MiddleCenter;
+                    b.Font = new Font("Sogui UI", 9, FontStyle.Regular);
+                    b.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+                    b.Text = row["cName"].ToString();
+
+                    b.Click += new EventHandler(filter_Click);
+                    categoryPanel.Controls.Add(b);
+                }
+
+            }
+        }
+
         private Dictionary<string, int> productQuantities = new Dictionary<string, int>(); // Dictionary to store product ID and its quantity
 
         private void GetData()
         {
             con.Open();
-            cmd = new MySqlCommand("SELECT p.pImage, p.pName, p.pID, c.cName FROM tbl_products AS p INNER JOIN tbl_category AS c ON c.cID =  p.cID WHERE c.cName LIKE '"+ _filter +"%' ORDER BY pName", con);
+            cmd = new MySqlCommand("SELECT p.pImage, p.pName, p.pID, c.cName, p.pStock FROM tbl_products AS p INNER JOIN tbl_category AS c ON c.cID = p.cID WHERE c.cName LIKE '" + _filter + "%' AND pName LIKE '%" + guna2TextBox1.Text + "%' ORDER BY pName", con);
             dr = cmd.ExecuteReader();
+
             while (dr.Read())
             {
-                long len = dr.GetBytes(0,0, null, 0, 0);
-                byte[] array = new byte[System.Convert.ToInt32(len) + 1];
-                dr.GetBytes(0,0, array, 0, System.Convert.ToInt32(len));
-                pic = new PictureBox();
-                pic.Width = 150;
-                pic.Height = 150;
-                pic.BackgroundImageLayout = ImageLayout.Stretch;
-                pic.BorderStyle = BorderStyle.FixedSingle;
-                pic.Cursor = Cursors.Hand;
-                pic.Tag = dr["pID"].ToString();
+                long len = dr.GetBytes(0, 0, null, 0, 0);
+                int qty = Convert.ToInt32(dr["pStock"]);
 
+                if (qty > 0) // Check if pQty is greater than 0
+                {
+                    byte[] array = new byte[System.Convert.ToInt32(len) + 1];
+                    dr.GetBytes(0, 0, array, 0, System.Convert.ToInt32(len));
 
-                name = new Label();
-                name.Text = dr["pName"].ToString();
-                name.BackColor = Color.White;
-                name.ForeColor = Color.Black;
-                name.TextAlign = ContentAlignment.MiddleCenter;
-                name.Font = new Font("Sogui UI",8, FontStyle.Regular);
-                name.Dock = DockStyle.Bottom;
-                name.Tag = dr["pID"].ToString();
+                    PictureBox pic = new PictureBox();
+                    pic.Width = 150;
+                    pic.Height = 150;
+                    pic.BackgroundImageLayout = ImageLayout.Stretch;
+                    //pic.BorderStyle = BorderStyle.FixedSingle;
+                    pic.Cursor = Cursors.Hand;
+                    pic.Tag = dr["pID"].ToString();
 
-                MemoryStream ms = new MemoryStream(array);
-                Bitmap bitmap = new Bitmap(ms);
-                pic.BackgroundImage = bitmap;
+                    Label name = new Label();
+                    name.Text = dr["pName"].ToString();
+                    name.BackColor = Color.White;
+                    name.ForeColor = Color.Black;
+                    name.TextAlign = ContentAlignment.MiddleCenter;
+                    name.Font = new Font("Sogui UI", 8, FontStyle.Regular);
+                    name.Dock = DockStyle.Bottom;
+                    name.Tag = dr["pID"].ToString();
 
-                pic.Controls.Add(name);
-                productPanel.Controls.Add(pic);
+                    Label stock = new Label();
+                    stock.Text = "Stock: " + dr["pStock"].ToString();
+                    stock.Height = 13;
+                    stock.BackColor = Color.White;
+                    stock.ForeColor = Color.Black;
+                    stock.TextAlign = ContentAlignment.TopCenter;
+                    stock.Font = new Font("Sogui UI", 7, FontStyle.Regular);
+                    stock.Dock = DockStyle.Bottom;
+                    stock.Tag = dr["pID"].ToString();
 
-                pic.Click += new EventHandler(OnClick);
+                    MemoryStream ms = new MemoryStream(array);
+                    Bitmap bitmap = new Bitmap(ms);
+                    pic.BackgroundImage = bitmap;
+
+                    
+                    pic.Controls.Add(name);
+                    pic.Controls.Add(stock);
+                    productPanel.Controls.Add(pic);
+
+                    pic.Click += new EventHandler(OnClick);
+                }
             }
+
             dr.Close();
             con.Close();
         }
@@ -191,34 +245,7 @@ namespace ConstructionMaterialManagementSystem
             }
         }
 
-        private void AddCategory()
-        {
-            string qry = "SELECT * FROM tbl_category";
-            MySqlCommand cmd = new MySqlCommand(qry, MainClass.con);
-            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-
-            categoryPanel.Controls.Clear();
-
-            if (dt.Rows.Count > 0 )
-            {
-                foreach (DataRow row in dt.Rows)
-                {
-                    Guna.UI2.WinForms.Guna2Button b = new Guna.UI2.WinForms.Guna2Button();
-                    b.FillColor = Color.FromArgb(50, 55, 89);
-                    b.Size = new Size(201, 40);
-                    b.TextAlign = (HorizontalAlignment)ContentAlignment.MiddleCenter;
-                    b.Font = new Font("Sogui UI", 9, FontStyle.Bold);
-                    b.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
-                    b.Text = row["cName"].ToString();
-
-                    b.Click += new EventHandler(filter_Click);
-                    categoryPanel.Controls.Add(b);
-                }
-                
-            }
-        }
+        
 
         private void filter_Click(object sender, EventArgs e)
         {
@@ -228,49 +255,7 @@ namespace ConstructionMaterialManagementSystem
         }
 
 
-        private void btnMyOrders_Click(object sender, EventArgs e)
-        {
-            Guna2Button clickedButton = (Guna2Button)sender; // Get the clicked button
-            lastClickedButton = clickedButton; // Update the tracked button
-            btnSettings(btnMyOrders, null);
-            frmMyOrders frmMy = new frmMyOrders();
-            frmMy.btnClose.Visible = false;
-            frmMy.btnSave.Visible = false;
-            frmMy.btnUpdate.Visible = false;
-            MainClass.BlurBackground(frmMy);
-        }
-
-        private void btnToShip_Click(object sender, EventArgs e)
-        {
-            Guna2Button clickedButton = (Guna2Button)sender; // Get the clicked button
-            lastClickedButton = clickedButton; // Update the tracked button
-            btnSettings(btnToShip, null);
-            frmToShip frmto = new frmToShip();
-            frmto.btnClose.Visible = false;
-            frmto.btnSave.Visible = false;
-            frmto.btnUpdate.Visible = false;
-            MainClass.BlurBackground(frmto);
-        }
-
-        private void btnToRecieve_Click(object sender, EventArgs e)
-        {
-            Guna2Button clickedButton = (Guna2Button)sender; // Get the clicked button
-            lastClickedButton = clickedButton; // Update the tracked button
-            btnSettings(btnToRecieve, null);
-            frmToRecieve frmto = new frmToRecieve();
-            frmto.btnClose.Visible = false;
-            frmto.btnSave.Visible = false;
-            frmto.btnUpdate.Visible = false;
-            MainClass.BlurBackground(frmto);
-        }
-
-        private void btnBackOrder_Click(object sender, EventArgs e)
-        {
-            Guna2Button clickedButton = (Guna2Button)sender; // Get the clicked button
-            lastClickedButton = clickedButton; // Update the tracked button
-            btnSettings(btnBackOrder, null);
-        }
-
+       
 
         private void guna2DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -296,6 +281,35 @@ namespace ConstructionMaterialManagementSystem
             }
         }
 
+        private void GetGuna()
+        {
+            con.Open();
+            cmd = new MySqlCommand("SELECT p.pImage, p.pName, p.pID, c.cName, p.pStock FROM tbl_products AS p INNER JOIN tbl_category AS c ON c.cID = p.cID WHERE c.cName LIKE '" + _filter + "%' AND pName LIKE '%" + guna2TextBox1.Text + "%' ORDER BY pName", con);
+            dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                int productId = Convert.ToInt32(dr["pID"]);
+                string productName = dr["pName"].ToString();
+                string categoryName = dr["cName"].ToString();
+                int stock = Convert.ToInt32(dr["pStock"]);  // Get stock from the query result
+
+                // Create a new DataGridViewRow
+                DataGridViewRow newRow = new DataGridViewRow();
+                newRow.Cells.Add(new DataGridViewImageCell()); // Assuming image cell (adjust based on your column type)
+                newRow.Cells.Add(new DataGridViewTextBoxCell { Value = productName });
+                newRow.Cells.Add(new DataGridViewTextBoxCell { Value = productId });  // Assuming product ID cell
+                newRow.Cells.Add(new DataGridViewTextBoxCell { Value = categoryName });
+                // Add a new cell for stock (assuming it's not displayed visually)
+                newRow.Cells.Add(new DataGridViewTextBoxCell { Value = stock });  // Hidden stock cell
+
+                guna2DataGridView1.Rows.Add(newRow);
+            }
+
+            dr.Close();
+            con.Close();
+        }
+
         private void guna2DataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             
@@ -304,8 +318,6 @@ namespace ConstructionMaterialManagementSystem
         
         private void btnRequest_Click(object sender, EventArgs e)
         {
-            DataTable dt = new DataTable();
-
             if (MainClass.validation(this) == false)
             {
                 MessageBox.Show("Please remove errors", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -328,46 +340,95 @@ namespace ConstructionMaterialManagementSystem
 
                     foreach (DataGridViewRow row in guna2DataGridView1.Rows)
                     {
-                        con.Open();
-                        cmd = new MySqlCommand("INSERT INTO tbl_myorder (mouID, moDate, mopName, moQty, moSite, moRef) VALUES (@mouID,@moDate, @mopName, @moQty, @moSite, @moRef)", con);
-                        cmd.Parameters.AddWithValue("@mouID", int.Parse(uid));
-                        cmd.Parameters.AddWithValue("@moDate", dtpMO.Value);
-                        cmd.Parameters.AddWithValue("@mopName", row.Cells["dgvcName"].Value);
-                        cmd.Parameters.AddWithValue("@moSite", txtSiteLoc.Text);
-                        cmd.Parameters.AddWithValue("@moRef", txtOrdRef.Text);
-                        cmd.Parameters.AddWithValue("@moQty", Convert.ToInt32(row.Cells["dgvQty"].Value));
-                        cmd.ExecuteNonQuery();
-                        dr.Close() ;
-                        con.Close();
-                        
-                        inserted++;
-                    }
+                        string productId = row.Cells["dgvID"].Value.ToString();  // Assuming "pID" is the product ID column name
+                        int parsedProductId;
 
-                    if (inserted > 0)
-                    {
-                        if  (MessageBox.Show(string.Format("{0} Item(s) Requested", inserted), "Message") == DialogResult.OK)
-                        {
-                            txtOrdRef.Clear();
-                            txtSiteLoc.Clear();
-                            cboUser.Items.Clear();
-                            guna2DataGridView1.Rows.Clear();
+                            if (int.TryParse(productId, out parsedProductId))
+                            {
+                                con.Open();
+                                // Insert into tbl_myorder (only if parsing is successful)
+                                cmd = new MySqlCommand("INSERT INTO `tbl_myorder` (`proID`, `mouID`, `Date and Time`, `Material`, `Qty`, `Site`, `Ref`) VALUES (@proID, @mouID, @moDate, @mopName, @moQty, @moSite, @moRef)", con);
+                                cmd.Parameters.AddWithValue("@proID", parsedProductId);
+                                cmd.Parameters.AddWithValue("@mouID", int.Parse(uid));
+                                cmd.Parameters.AddWithValue("@moDate", dtpMO.Value);
+                                cmd.Parameters.AddWithValue("@mopName", row.Cells["dgvcName"].Value);
+                                cmd.Parameters.AddWithValue("@moSite", txtSiteLoc.Text);
+                                cmd.Parameters.AddWithValue("@moRef", txtOrdRef.Text);
+                                cmd.Parameters.AddWithValue("@moQty", Convert.ToInt32(row.Cells["dgvQty"].Value));
+                                cmd.ExecuteNonQuery();
+                                con.Close();
+                                inserted++;
+                            }
+
+                            else
+                            {
+                                // Handle the case where parsing fails (e.g., display a message)
+                                MessageBox.Show("Invalid product ID format in row: " + (row.Index + 1));
+                            }
                         }
-                        
-                    }
 
+                        if (inserted > 0)
+                        {
+                            if (MessageBox.Show(string.Format("{0} Item(s) Requested", inserted), "Message") == DialogResult.OK)
+                            {
+                                txtOrdRef.Clear();
+                                txtSiteLoc.Clear();
+                                cboUser.Items.Clear();
+                                guna2DataGridView1.Rows.Clear();
+                            }
+
+                        }
                 }
                 catch (Exception ex)
                 {
                     con.Close();
                     MessageBox.Show("Warning: " + ex.Message, "Warning");
-                }
+                }       
             }
                 
         }
 
-        private void guna2DateTimePicker1_ValueChanged(object sender, EventArgs e)
+        private void btnMyOrders_Click(object sender, EventArgs e)
         {
+            Guna2Button clickedButton = (Guna2Button)sender; // Get the clicked button
+            lastClickedButton = clickedButton; // Update the tracked button
+            btnSettings(btnMyOrders, null);
+            frmMyOrders frmMy = new frmMyOrders();
+            frmMy.btnClose.Visible = false;
+            frmMy.btnSave.Visible = false;
+            frmMy.btnUpdate.Visible = false;
+            MainClass.BlurBackground(frmMy);
+        }
 
+
+        private void btnToRecieve_Click(object sender, EventArgs e)
+        {
+            Guna2Button clickedButton = (Guna2Button)sender; // Get the clicked button
+            lastClickedButton = clickedButton; // Update the tracked button
+            btnSettings(btnToRecieve, null);
+            frmToRecieve frmto = new frmToRecieve();
+            frmto.btnClose.Visible = false;
+            frmto.btnSave.Visible = false;
+            frmto.btnUpdate.Visible = false;
+            MainClass.BlurBackground(frmto);
+        }
+
+        private void btnBackOrder_Click(object sender, EventArgs e)
+        {
+            Guna2Button clickedButton = (Guna2Button)sender; // Get the clicked button
+            lastClickedButton = clickedButton; // Update the tracked button
+            btnSettings(btnBackOrder, null);
+            frmBackOrder frmto = new frmBackOrder();
+            frmto.btnClose.Visible = false;
+            frmto.btnSave.Visible = false;
+            frmto.btnUpdate.Visible = false;
+            MainClass.BlurBackground(frmto);
+        }
+
+        private void guna2TextBox1_TextChanged(object sender, EventArgs e)
+        {
+            productPanel.Controls.Clear();
+            GetData();
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -375,14 +436,24 @@ namespace ConstructionMaterialManagementSystem
             this.Close();
         }
 
-        private void cboUser_SelectedIndexChanged(object sender, EventArgs e)
+        private static int counter = 0;
+        public static string GenerateReferenceNumber()
         {
-
+            // Combine a prefix with a timestamp and a counter
+            string prefix = "REF";
+            string timestamp = DateTime.Now.ToString("yyyyMMddHHmmss");
+            string referenceNumber = $"{prefix}_{timestamp}_{counter++}";
+           
+            return referenceNumber;
         }
 
-        private void label5_Click(object sender, EventArgs e)
+        private void dtpMO_ValueChanged(object sender, EventArgs e)
         {
+            txtOrdRef.Text = GenerateReferenceNumber();
+        }
 
+        private void txtOrdRef_TextChanged(object sender, EventArgs e)
+        {
         }
     }
 }

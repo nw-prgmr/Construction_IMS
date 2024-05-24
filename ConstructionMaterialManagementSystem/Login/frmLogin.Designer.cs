@@ -163,13 +163,13 @@
             this.lnkFP.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(86)))), ((int)(((byte)(215)))), ((int)(((byte)(180)))));
             this.lnkFP.Location = new System.Drawing.Point(263, 387);
             this.lnkFP.Name = "lnkFP";
-            this.lnkFP.Size = new System.Drawing.Size(134, 23);
+            this.lnkFP.Size = new System.Drawing.Size(143, 23);
             this.lnkFP.TabIndex = 4;
             this.lnkFP.TabStop = true;
-            this.lnkFP.Text = "Forget Password";
+            this.lnkFP.Text = "Forgot Password?";
             this.lnkFP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lnkFP.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(101)))), ((int)(((byte)(102)))));
-            this.lnkFP.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkFP_LinkClicked);
+            this.lnkFP.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkFP_LinkClicked_1);
             // 
             // label1
             // 

@@ -25,6 +25,11 @@ namespace ConstructionMaterialManagementSystem.Model
             LoadRecords();
         }
 
+        private void guna2TextBox1_TextChanged(object sender, EventArgs e)
+        {
+            LoadRecords();
+        }
+
         public int i = 0;
 
 
@@ -32,7 +37,7 @@ namespace ConstructionMaterialManagementSystem.Model
         {
             int i = 0;
             guna2DataGridView1.Rows.Clear();
-            cmd = new MySqlCommand("SELECT * FROM tbl_supplier", con);
+            cmd = new MySqlCommand("SELECT * FROM tbl_supplier WHERE sName LIKE '%"+ guna2TextBox1.Text + "%' ", con);
             con.Open();
             dr = cmd.ExecuteReader();
             while (dr.Read())

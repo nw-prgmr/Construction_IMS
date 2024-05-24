@@ -9,14 +9,36 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Collections;
 using System.IO;
+using ConstructionMaterialManagementSystem.View;
+using MySql.Data.MySqlClient;
+using System.Security.Cryptography;
+using TheArtOfDevHtmlRenderer.Adapters;
+using Microsoft.Win32;
 
 namespace ConstructionMaterialManagementSystem.Model
 {
     public partial class frmUserAdd : SampleAdd
     {
-        public frmUserAdd()
+        MySqlConnection con;
+        MySqlCommand cmd;
+        MySqlDataReader dr;
+        MainClass mc = new MainClass();
+        frmUsersView frmusers;
+
+        public frmUserAdd(frmUsersView FRMUSERS)
         {
             InitializeComponent();
+            con = new MySqlConnection(mc.dbconnect());
+            frmusers = FRMUSERS;
+        }
+
+        public void Clear()
+        {
+            txtuEmail.Text = "";
+            txtuName.Text = "";
+            txtuPass.Text = "";
+            txtuUsername.Text = "";
+            txtuName.Focus();
         }
 
         public int id = 0;
@@ -32,63 +54,58 @@ namespace ConstructionMaterialManagementSystem.Model
             }
             else
             {
-                string qry = "";
-
-                if(id==0) // INSERT
+                try
                 {
-                    qry = @"INSERT INTO tbl_users (uName, username, uPass, uStatus, uEmail, uImage) VALUES (@name, @username, @pass, @uStatus, @email, @image)";
+                    MemoryStream ms = new MemoryStream();
+                    txtuPic.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    byte[] arrImage = ms.GetBuffer();
+
+                    // Insert product
+                    con.Open();
+                    //cmd = new MySqlCommand("INSERT INTO tbl_products (pName, pDescription, cID, bID, sID, pCost, pStock) VALUES (@pName, @pDescription, @pCatID, @pBrandID, @pSupplierID, @pCost, @pStock)", con);
+                    cmd = new MySqlCommand("INSERT INTO `tbl_users`(`uID`, `uName`, `username`, `uPass`, `uStatus`, `uEmail`, `uImage`) VALUES (@uName, @username, @uPass, @uStatus, @uEmail, @uImage)", con);
+                    cmd.Parameters.AddWithValue("@uName", txtuName.Text);
+                    cmd.Parameters.AddWithValue("@username", txtuUsername.Text);
+                    cmd.Parameters.AddWithValue("@uPass", txtuPass);
+                    cmd.Parameters.AddWithValue("@uStatus", txtStatus.Text);
+                    cmd.Parameters.AddWithValue("@uEmail", txtuEmail);
+                    cmd.Parameters.AddWithValue("@uImage", arrImage);
+                    cmd.ExecuteNonQuery();
+
+
+
+                    if (gmdSampleAdd.Show("Save Successfully.", "Product Added") == DialogResult.OK)
+                    {
+                        this.Close();
+                    }
+                    Clear();
+                  //  frmUsersView.LoadData();
+                    con.Close();
+
+
                 }
-                else //UPDATE
+
+                catch (Exception ex)
                 {
-                    qry = @"UPDATE tbl_users SET uName = @name,
-                            uPass = @pass,
-                            username = @username,
-                            uEmail = @email,
-                            uImage = @image,
-                            WHERE uID = @id";
-                }
-
-                Image temp = new Bitmap(txtuPic.Image);
-                MemoryStream ms = new MemoryStream();
-                temp.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-                imageByteArray = ms.ToArray();
-
-
-                Hashtable ht = new Hashtable();
-                ht.Add("@id", id);
-                ht.Add("@name", txtuName.Text);
-                ht.Add("@username", txtuUsername.Text);
-                ht.Add("@pass", txtuPass.Text);
-                ht.Add("@email", txtuEmail.Text);
-                ht.Add("@image", imageByteArray);
-
-                if (MainClass.SQL(qry, ht)>0)
-                {
-                    gmdSampleAdd.Buttons = Guna.UI2.WinForms.MessageDialogButtons.OK;
-                    gmdSampleAdd.Icon = Guna.UI2.WinForms.MessageDialogIcon.Information;
-                    gmdSampleAdd.Show("Data Save Successfully");
-                    id = 0;
-                    txtuEmail.Text = "";
-                    txtuName.Text = "";
-                    txtuPass.Text = "";
-                    txtuUsername.Text = "";
-                    txtuPic.Image = ConstructionMaterialManagementSystem.Properties.Resources.user;
-                    txtuName.Focus();
-                }
+                con.Close(); // Ensure connection is closed even on error
+                gmdSampleAdd.Buttons = Guna.UI2.WinForms.MessageDialogButtons.OK;
+                gmdSampleAdd.Icon = Guna.UI2.WinForms.MessageDialogIcon.Error;
+                gmdSampleAdd.Show("Error Insert data in tbl_products: An error occurred: " + ex.Message, "Error");
             }
+
+        }
+    }
+
+        private void btnProBrowse_Click(object sender, EventArgs e)
+        {
+            
         }
 
-        public string filePath = "";
-        Byte[] imageByteArray;
         private void btnuBrowse_Click(object sender, EventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Images(.jpg, .png)|*.png; *jpg";
-            if(ofd.ShowDialog()==DialogResult.OK)
-            {
-                filePath = ofd.FileName;
-                txtuPic.Image = new Bitmap(filePath);
-            }
+            openFileDialog1.Filter = "Image files (*.png) |*.png| (*.jpg) |*.jpg| (*.gif) |*.gif";
+            openFileDialog1.ShowDialog();
+            txtuPic.Image = Image.FromFile(openFileDialog1.FileName);
         }
     }
 }

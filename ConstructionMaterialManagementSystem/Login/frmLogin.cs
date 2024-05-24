@@ -39,7 +39,7 @@ namespace ConstructionMaterialManagementSystem
 
             if (txtPassword.Text == "Password")
             {
-                txtPassword.Text = ""; 
+                txtPassword.Text = "";
             }
 
             string username = txtUsername.Text.Trim();
@@ -52,83 +52,92 @@ namespace ConstructionMaterialManagementSystem
                 txtPassword.Text = "Password";
                 return;
             }
-            
-                if (MainClass.IsValidUser(txtUsername.Text, txtPassword.Text) == false)
-                {
-                    lblMessage.Text = "Invalid Username or Password";
-                    return;
-                }
 
+            if (MainClass.IsValidUser(txtUsername.Text, txtPassword.Text) == false)
+            {
+                lblMessage.Text = "Invalid Username or Password";
+                return;
+            }
+
+            else
+            {
+                if (MainClass.STATUS == "Administrator")
+                {
+                    frmDashboard adminForm = new frmDashboard(); // Assuming frmMain is the admin form
+                    adminForm.Show();
+                }
                 else
                 {
-                    frmDashboard dashboard = new frmDashboard();
-                    dashboard.Show();
-                    this.Hide();
+                    frmMainUser userForm = new frmMainUser(); // Assuming frmMainUser is the user form
+                    userForm.Show();
                 }
-            
+                this.Hide();
+            }
+        }
 
-          
-            
-            
-            /*
-            try
+
+
+
+
+        /*
+        try
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                connection.Open();
+
+                string query = "SELECT COUNT(*) FROM users WHERE username = @username";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@username", username);
+
+                int count = Convert.ToInt32(command.ExecuteScalar());
+
+                if (count == 0)
                 {
-                    connection.Open();
+                    lblMessage.Text = "User Not Found";
+                    txtUsername.Clear();
+                    txtPassword.Clear();
+                    txtUsername.Focus();
+                    user_focus();
 
-                    string query = "SELECT COUNT(*) FROM users WHERE username = @username";
-                    MySqlCommand command = new MySqlCommand(query, connection);
+                }
+                else
+                {
+                    query = "SELECT COUNT(*) FROM users WHERE username = @username AND password = @password";
+                    command = new MySqlCommand(query, connection);
                     command.Parameters.AddWithValue("@username", username);
+                    command.Parameters.AddWithValue("@password", password);
 
-                    int count = Convert.ToInt32(command.ExecuteScalar());
+                    count = Convert.ToInt32(command.ExecuteScalar());
 
-                    if (count == 0)
+                    if (count > 0)
                     {
-                        lblMessage.Text = "User Not Found";
-                        txtUsername.Clear();
-                        txtPassword.Clear();
-                        txtUsername.Focus();
-                        user_focus();
-                        
+                        frmDashboard frmDashboard = new frmDashboard();
+                        frmDashboard.Show();
+                        this.Hide();
                     }
                     else
                     {
-                        query = "SELECT COUNT(*) FROM users WHERE username = @username AND password = @password";
-                        command = new MySqlCommand(query, connection);
-                        command.Parameters.AddWithValue("@username", username);
-                        command.Parameters.AddWithValue("@password", password);
-
-                        count = Convert.ToInt32(command.ExecuteScalar());
-
-                        if (count > 0)
+                        if (string.IsNullOrEmpty(txtPassword.Text))
                         {
-                            frmDashboard frmDashboard = new frmDashboard();
-                            frmDashboard.Show();
-                            this.Hide();
+                            lblMessage.Text = "Input password.";
+                            txtPassword.Focus();
                         }
                         else
                         {
-                            if (string.IsNullOrEmpty(txtPassword.Text))
-                            {
-                                lblMessage.Text = "Input password.";
-                                txtPassword.Focus();
-                            }
-                            else
-                            {
-                                lblMessage.Text = "Incorrect password.";
-                                txtPassword.Focus();
-                            }
-                            
+                            lblMessage.Text = "Incorrect password.";
+                            txtPassword.Focus();
                         }
+
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            } */
         }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        } */
+
 
         private void txtUsername_Click(object sender, EventArgs e)
         {
@@ -153,7 +162,7 @@ namespace ConstructionMaterialManagementSystem
         private void btnCreateAcc_Click(object sender, EventArgs e)
         {
             frmEmail frmRegister = new frmEmail();
-            frmRegister.Show();
+            MainClass.BlurBackground(frmRegister);
             this.Hide();
         }
 
@@ -217,12 +226,6 @@ namespace ConstructionMaterialManagementSystem
             Application.Exit();
         }
 
-        private void lnkFP_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            frmEmail FP = new frmEmail();
-            FP.Show();
-        }
-
         private void pictureBox3_Click(object sender, EventArgs e)
         {
 
@@ -244,6 +247,12 @@ namespace ConstructionMaterialManagementSystem
                 btnLogin.FillColor = Color.FromArgb(86, 215, 180);
                 btnLogin.ForeColor = Color.FromArgb(31, 52, 64);
             }
+        }
+
+        private void lnkFP_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            frmEmail FP = new frmEmail();
+            MainClass.BlurBackground(FP);
         }
     }
 }

@@ -36,7 +36,7 @@ namespace ConstructionMaterialManagementSystem.View
         {
             int i = 0;
             guna2DataGridView1.Rows.Clear();
-            cmd = new MySqlCommand("SELECT * FROM tbl_category",con);
+            cmd = new MySqlCommand("SELECT * FROM tbl_category WHERE cName LIKE '%"+ guna2TextBox1.Text + "%'", con);
             con.Open();
             dr = cmd.ExecuteReader();
             while (dr.Read())
@@ -97,6 +97,11 @@ namespace ConstructionMaterialManagementSystem.View
         private void guna2Button1_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void guna2TextBox1_TextChanged(object sender, EventArgs e)
+        {
+            LoadRecords();
         }
     }
 }

@@ -138,6 +138,12 @@
       <DependentUpon>frmPOS.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Dashboard.cs" />
+    <Compile Include="Order Process\frmBackOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Order Process\frmBackOrder.Designer.cs">
+      <DependentUpon>frmBackOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Order Process\frmManageOders.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -149,12 +155,6 @@
     </Compile>
     <Compile Include="Order Process\frmToRecieve.Designer.cs">
       <DependentUpon>frmToRecieve.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Order Process\frmToShip.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Order Process\frmToShip.Designer.cs">
-      <DependentUpon>frmToShip.cs</DependentUpon>
     </Compile>
     <Compile Include="ucProduct.cs">
       <SubType>UserControl</SubType>
@@ -290,14 +290,14 @@
     <EmbeddedResource Include="frmPOS.resx">
       <DependentUpon>frmPOS.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Order Process\frmBackOrder.resx">
+      <DependentUpon>frmBackOrder.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Order Process\frmManageOders.resx">
       <DependentUpon>frmManageOders.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Order Process\frmToRecieve.resx">
       <DependentUpon>frmToRecieve.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Order Process\frmToShip.resx">
-      <DependentUpon>frmToShip.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucProduct.resx">
       <DependentUpon>ucProduct.cs</DependentUpon>

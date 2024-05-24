@@ -1,4 +1,5 @@
 ﻿using ConstructionMaterialManagementSystem.Model;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,9 +14,16 @@ namespace ConstructionMaterialManagementSystem
 {
     public partial class frmUsersView : SampleView
     {
+        MySqlConnection con;
+        MySqlCommand cmd;
+        MySqlDataReader dr;
+        MainClass mc = new MainClass();
+
         public frmUsersView()
         {
             InitializeComponent();
+            con = new MySqlConnection(mc.dbconnect());
+            LoadData();
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -25,9 +33,9 @@ namespace ConstructionMaterialManagementSystem
 
         public override void btnAdd_Click(object sender, EventArgs e)
         {
-            frmUserAdd frm = new frmUserAdd();
-            frm.btnUpdate.Visible = false;
-            MainClass.BlurBackground(frm);
+            frmUserAdd productAdd = new frmUserAdd(this);
+            productAdd.btnUpdate.Visible = false;
+            MainClass.BlurBackground(productAdd);
             LoadData();
         }
 

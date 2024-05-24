@@ -35,7 +35,6 @@ namespace ConstructionMaterialManagementSystem.Model
         {
             txtProName.Clear();
             txtProDesc.Clear();
-            txtProCost.Clear();
             txtProStock.Clear();
             cboCategory.Items.Clear();
             cboBrand.Items.Clear();
@@ -138,7 +137,6 @@ namespace ConstructionMaterialManagementSystem.Model
                     cmd.Parameters.AddWithValue("@pCatID", Convert.ToInt32(cid));
                     cmd.Parameters.AddWithValue("@pBrandID", Convert.ToInt32(bid));
                     cmd.Parameters.AddWithValue("@pSupplierID", Convert.ToInt32(sid));
-                    cmd.Parameters.AddWithValue("@pCost",  Convert.ToDouble(txtProCost.Text));
                     cmd.Parameters.AddWithValue("@pStock", Convert.ToUInt32(txtProStock.Text));
                     cmd.Parameters.AddWithValue("@pImage", arrImage);
                     cmd.ExecuteNonQuery();
@@ -213,14 +211,13 @@ namespace ConstructionMaterialManagementSystem.Model
                     // Insert product
                     con.Open();
                     //cmd = new MySqlCommand("INSERT INTO tbl_products (pName, pDescription, cID, bID, sID, pCost, pStock) VALUES (@pName, @pDescription, @pCatID, @pBrandID, @pSupplierID, @pCost, @pStock)", con);
-                    cmd = new MySqlCommand("UPDATE tbl_products SET pName = @pName, pDescription = @pDescription, cID = @pCatID, bID = @pBrandID, sID = @pSupplierID, pCost = @pCost, pStock = @pStock, pImage = @pImage  WHERE pID LIKE @pID", con);
+                    cmd = new MySqlCommand("UPDATE tbl_products SET pName = @pName, pDescription = @pDescription, cID = @pCatID, bID = @pBrandID, sID = @pSupplierID, pStock = @pStock, pImage = @pImage  WHERE pID LIKE @pID", con);
                     cmd.Parameters.AddWithValue("@pID", lblProduct.Text);
                     cmd.Parameters.AddWithValue("@pName", txtProName.Text);
                     cmd.Parameters.AddWithValue("@pDescription", txtProDesc.Text);
                     cmd.Parameters.AddWithValue("@pCatID", cid);
                     cmd.Parameters.AddWithValue("@pBrandID", bid);
                     cmd.Parameters.AddWithValue("@pSupplierID", sid);
-                    cmd.Parameters.AddWithValue("@pCost", Convert.ToDouble(txtProCost.Text));
                     cmd.Parameters.AddWithValue("@pStock", Convert.ToUInt32(txtProStock.Text));
                     cmd.Parameters.AddWithValue("@pImage", arrImage);
                     cmd.ExecuteNonQuery();

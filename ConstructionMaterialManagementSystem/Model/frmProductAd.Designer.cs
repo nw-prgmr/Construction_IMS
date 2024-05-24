@@ -32,10 +32,8 @@
             this.cboBrand = new Guna.UI2.WinForms.Guna2ComboBox();
             this.cboCategory = new Guna.UI2.WinForms.Guna2ComboBox();
             this.txtProStock = new Guna.UI2.WinForms.Guna2TextBox();
-            this.txtProCost = new Guna.UI2.WinForms.Guna2TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtProDesc = new Guna.UI2.WinForms.Guna2TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.txtProName = new Guna.UI2.WinForms.Guna2TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -138,7 +136,7 @@
             this.txtProStock.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtProStock.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtProStock.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtProStock.Location = new System.Drawing.Point(233, 359);
+            this.txtProStock.Location = new System.Drawing.Point(38, 362);
             this.txtProStock.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtProStock.Name = "txtProStock";
             this.txtProStock.PasswordChar = '\0';
@@ -148,34 +146,11 @@
             this.txtProStock.TabIndex = 5;
             this.txtProStock.Tag = "v";
             // 
-            // txtProCost
-            // 
-            this.txtProCost.BorderColor = System.Drawing.Color.Gray;
-            this.txtProCost.BorderRadius = 10;
-            this.txtProCost.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtProCost.DefaultText = "";
-            this.txtProCost.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtProCost.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtProCost.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtProCost.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtProCost.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtProCost.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtProCost.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtProCost.Location = new System.Drawing.Point(38, 359);
-            this.txtProCost.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtProCost.Name = "txtProCost";
-            this.txtProCost.PasswordChar = '\0';
-            this.txtProCost.PlaceholderText = "";
-            this.txtProCost.SelectedText = "";
-            this.txtProCost.Size = new System.Drawing.Size(173, 31);
-            this.txtProCost.TabIndex = 4;
-            this.txtProCost.Tag = "v";
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(242, 335);
+            this.label6.Location = new System.Drawing.Point(47, 338);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(45, 20);
             this.label6.TabIndex = 13;
@@ -203,16 +178,6 @@
             this.txtProDesc.Size = new System.Drawing.Size(547, 63);
             this.txtProDesc.TabIndex = 6;
             this.txtProDesc.Tag = "v";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(48, 335);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(38, 20);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Cost";
             // 
             // txtProName
             // 
@@ -347,10 +312,8 @@
             this.Controls.Add(this.cboSupplier);
             this.Controls.Add(this.cboCategory);
             this.Controls.Add(this.txtProStock);
-            this.Controls.Add(this.txtProCost);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtProDesc);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.txtProName);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.Supplier);
@@ -367,10 +330,8 @@
             this.Controls.SetChildIndex(this.Supplier, 0);
             this.Controls.SetChildIndex(this.label7, 0);
             this.Controls.SetChildIndex(this.txtProName, 0);
-            this.Controls.SetChildIndex(this.label5, 0);
             this.Controls.SetChildIndex(this.txtProDesc, 0);
             this.Controls.SetChildIndex(this.label6, 0);
-            this.Controls.SetChildIndex(this.txtProCost, 0);
             this.Controls.SetChildIndex(this.txtProStock, 0);
             this.Controls.SetChildIndex(this.cboCategory, 0);
             this.Controls.SetChildIndex(this.cboSupplier, 0);
@@ -392,10 +353,8 @@
         public Guna.UI2.WinForms.Guna2ComboBox cboBrand;
         public Guna.UI2.WinForms.Guna2ComboBox cboCategory;
         public Guna.UI2.WinForms.Guna2TextBox txtProStock;
-        public Guna.UI2.WinForms.Guna2TextBox txtProCost;
         private System.Windows.Forms.Label label6;
         public Guna.UI2.WinForms.Guna2TextBox txtProDesc;
-        private System.Windows.Forms.Label label5;
         public Guna.UI2.WinForms.Guna2TextBox txtProName;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label4;
